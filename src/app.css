@@ -1,0 +1,310 @@
+@import '@fontsource/atkinson-hyperlegible';
+@import '@fontsource/jetbrains-mono';
+
+html {
+	/* font */
+	--font-system-ui: 'Atkinson Hyperlegible', sans-serif;
+	--font-monospace-code: 'JetBrains Mono', monospace;
+
+	/* dark */
+	--brand-dark: var(--orange-3);
+	--text-1-dark: var(--gray-3);
+	--text-2-dark: var(--gray-5);
+	--surface-1-dark: var(--gray-12);
+	--surface-2-dark: var(--gray-11);
+	--surface-3-dark: var(--gray-10);
+	--surface-4-dark: var(--gray-9);
+	--background-dark: var(--gradient-8);
+	--border-dark: var(--gray-9);
+	--link-dark: var(--indigo-6); /* Example link color for dark theme */
+
+	/* light */
+	--brand-light: var(--orange-10);
+	--text-1-light: var(--gray-8); /* This is your dark text/icon color for light mode - GOOD! */
+	--text-2-light: var(--gray-7);
+	--surface-1-light: var(--gray-0); /* Often pure white for background */
+	--surface-2-light: var(--gray-1); /* Very light gray */
+	--surface-3-light: var(--gray-2); /* Slightly darker light gray */
+	--surface-4-light: var(--gray-3); /* Even darker light gray */
+	--background-light: none; /* Relies on default html/body background, often white */
+	--border-light: var(--gray-4);
+	--link-light: var(--indigo-8);
+
+	/* --- Media Chrome Variables --- */
+	/* Define Media Chrome specific variables based on your theme's colors */
+
+	/* Media Chrome - Dark Mode Defaults */
+	--media-primary-color-dark: var(--brand-dark);
+	--media-secondary-color-dark: var(--gray-11);
+	--media-icon-color-dark: var(--text-1-dark);
+	--media-text-color-dark: var(--text-1-dark);
+	--media-control-background-dark: var(--surface-2-dark);
+	--media-range-thumb-background-dark: var(--brand-dark);
+	--media-range-bar-color-dark: var(--surface-4-dark);
+	--media-scrubber-background-dark: var(--gray-8);
+	--media-buffered-color-dark: var(--gray-7);
+	--media-time-range-color-dark: var(--gray-9);
+
+	/* Media Chrome - Light Mode */
+	--media-primary-color-light: var(--brand-light);
+	--media-secondary-color-light: var(--gray-1);
+	--media-icon-color-light: var(--text-1-light); /* Will be var(--gray-8) - good, dark! */
+	--media-text-color-light: var(--text-1-light); /* Will be var(--gray-8) - good, dark! */
+
+	/* --- CRITICAL CHANGE FOR LIGHT MODE VISIBILITY --- */
+	/* Make the control background visibly distinct from pure white. */
+	/* Using a slightly darker gray or a very subtle semi-transparent dark color */
+	--media-control-background-light: var(--gray-2); /* Use a more distinct light gray */
+	/* Alternative: --media-control-background-light: rgba(0, 0, 0, 0.05); */ /* Very subtle dark overlay */
+
+	--media-range-thumb-background-light: var(--brand-light);
+	--media-range-bar-color-light: var(--surface-4-light);
+	--media-scrubber-background-light: var(--gray-3);
+	--media-buffered-color-light: var(--gray-4);
+	--media-time-range-color-light: var(--gray-3); /* Also make this slightly darker for the track */
+}
+
+:root {
+	color-scheme: dark;
+
+	--brand: var(--brand-dark);
+	--text-1: var(--text-1-dark);
+	--text-2: var(--text-2-dark);
+	--surface-1: var(--surface-1-dark);
+	--surface-2: var(--surface-2-dark);
+	--surface-3: var(--surface-3-dark);
+	--surface-4: var(--surface-4-dark);
+	--background: var(--background-dark);
+	--border: var(--border-dark);
+	--link: var(--link-dark);
+
+	/* Assign active Media Chrome variables */
+	--media-primary-color: var(--media-primary-color-dark);
+	--media-secondary-color: var(--media-secondary-color-dark);
+	--media-icon-color: var(--media-icon-color-dark);
+	--media-text-color: var(--media-text-color-dark);
+	--media-control-background: var(--media-control-background-dark);
+	--media-range-thumb-background: var(--media-range-thumb-background-dark);
+	--media-range-bar-color: var(--media-range-bar-color-dark);
+	--media-scrubber-background: var(--media-scrubber-background-dark);
+	--media-buffered-color: var(--media-buffered-color-dark);
+	--media-time-range-color: var(--media-time-range-color-dark);
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		color-scheme: light;
+
+		--brand: var(--brand-light);
+		--text-1: var(--text-1-light);
+		--text-2: var(--text-2-light);
+		--surface-1: var(--surface-1-light);
+		--surface-2: var(--surface-2-light);
+		--surface-3: var(--surface-3-light);
+		--surface-4: var(--surface-4-light);
+		--background: var(--background-light);
+		--border: var(--border-light);
+		--link: var(--link-light);
+
+		/* Assign active Media Chrome variables for light mode */
+		--media-primary-color: var(--media-primary-color-light);
+		--media-secondary-color: var(--media-secondary-color-light);
+		--media-icon-color: var(--media-icon-color-light);
+		--media-text-color: var(--media-text-color-light);
+		--media-control-background: var(--media-control-background-light);
+		--media-range-thumb-background: var(--media-range-thumb-background-light);
+		--media-range-bar-color: var(--media-range-bar-color-light);
+		--media-scrubber-background: var(--media-scrubber-background-light);
+		--media-buffered-color: var(--media-buffered-color-light);
+		--media-time-range-color: var(--media-time-range-color-light);
+	}
+}
+
+[color-scheme='dark'] {
+	color-scheme: dark;
+
+	--brand: var(--brand-dark);
+	--text-1: var(--text-1-dark);
+	--text-2: var(--text-2-dark);
+	--surface-1: var(--surface-1-dark);
+	--surface-2: var(--surface-2-dark);
+	--surface-3: var(--surface-3-dark);
+	--surface-4: var(--surface-4-dark);
+	--background: var(--background-dark);
+	--border: var(--border-dark);
+	--link: var(--link-dark);
+
+	/* Assign active Media Chrome variables */
+	--media-primary-color: var(--media-primary-color-dark);
+	--media-secondary-color: var(--media-secondary-color-dark);
+	--media-icon-color: var(--media-icon-color-dark);
+	--media-text-color: var(--media-text-color-dark);
+	--media-control-background: var(--media-control-background-dark);
+	--media-range-thumb-background: var(--media-range-thumb-background-dark);
+	--media-range-bar-color: var(--media-range-bar-color-dark);
+	--media-scrubber-background: var(--media-scrubber-background-dark);
+	--media-buffered-color: var(--media-buffered-color-dark);
+	--media-time-range-color: var(--media-time-range-color-dark);
+}
+
+[color-scheme='light'] {
+	color-scheme: light;
+
+	--brand: var(--brand-light);
+	--text-1: var(--text-1-light);
+	--text-2: var(--text-2-light);
+	--surface-1: var(--surface-1-light);
+	--surface-2: var(--surface-2-light);
+	--surface-3: var(--surface-3-light);
+	--surface-4: var(--surface-4-light);
+	--background: var(--background-light);
+	--border: var(--border-light);
+	--link: var(--link-light);
+
+	/* Assign active Media Chrome variables for light mode */
+	--media-primary-color: var(--media-primary-color-light);
+	--media-secondary-color: var(--media-secondary-color-light);
+	--media-icon-color: var(--media-icon-color-light);
+	--media-text-color: var(--media-text-color-light);
+	--media-control-background: var(--media-control-background-light);
+	--media-range-thumb-background: var(--media-range-thumb-background-light);
+	--media-range-bar-color: var(--media-range-bar-color-light);
+	--media-scrubber-background: var(--media-scrubber-background-light);
+	--media-buffered-color: var(--media-buffered-color-light);
+	--media-time-range-color: var(--media-time-range-color-light);
+}
+
+html,
+body {
+	height: 100%;
+}
+
+html {
+	color: var(--text-1);
+	accent-color: var(--link);
+	background-image: var(--background);
+	background-attachment: fixed;
+}
+
+img {
+	border-radius: var(--radius-3);
+}
+
+ul,
+ol {
+	list-style: none;
+	padding: 0;
+}
+
+li {
+	padding-inline-start: 0;
+}
+
+.surface-1 {
+	background-color: var(--surface-1);
+	color: var(--text-2);
+}
+
+.surface-2 {
+	background-color: var(--surface-2);
+	color: var(--text-2);
+}
+
+.surface-3 {
+	background-color: var(--surface-3);
+	color: var(--text-1);
+}
+
+.surface-4 {
+	background-color: var(--surface-4);
+	color: var(--text-1);
+}
+
+/* Example: Styling for your Media Chrome player container */
+/* You would apply these variables to the actual media-chrome elements
+   or a parent container that wraps them. */
+.header-media-player {
+	/* This class is applied to <media-controller> */
+	/* General player size adjustments */
+	width: 250px; /* Adjust width as needed for your header */
+	height: 30px; /* Compact height for the control bar */
+	font-size: 0.9em; /* Smaller font for controls */
+
+	/* IMPORTANT: CUSTOMIZE COLORS USING MEDIA-CHROME CSS VARIABLES */
+	/* These variables will automatically inherit from your :root definitions,
+       which correctly switch between dark and light modes.
+       Only override here if this specific player needs colors *different* from the global theme. */
+
+	--media-background-color: transparent; /* Often good for a header player */
+	--media-control-background: transparent; /* Transparent background for controls */
+
+	/* --- CRITICAL CHANGE FOR LIGHT MODE HOVER VISIBILITY --- */
+	/* Ensure hover background is visible in light mode */
+	--media-control-hover-background: var(--surface-3); /* Use a darker light surface for hover */
+	/* In light mode, this will be var(--gray-2) */
+	/* If gray-2 is still too light, try gray-3 or rgba(0,0,0,0.1) */
+
+	/* These variables will now correctly inherit from :root,
+       which correctly switches between dark and light themes */
+	/* --media-text-color: var(--text-1); (inherited from :root) */
+	/* --media-button-icon-color: var(--text-1); (inherited from :root) */
+
+	--media-range-thumb-color: var(--brand); /* Use your active brand color */
+	--media-range-track-color: var(--text-2); /* A subtle track color */
+	--media-range-track-active-color: var(--brand); /* Active track matches brand */
+
+	--media-focus-color: var(--link); /* Use your active link/accent color for focus */
+	--media-font-family: var(--font-system-ui); /* Use your global system font */
+	--media-button-border-radius: var(--radius-round); /* Use your global radius var */
+
+	/* Specific adjustments for internal elements if needed */
+	/* Note: .player-label is a class applied to media-time-display */
+	& .player-label {
+		font-weight: var(--font-weight-bold);
+	}
+
+	/* Adjust individual button sizes if needed */
+	media-control-bar > * {
+		/* Targets direct children of control bar */
+		height: 30px; /* Make all controls a bit smaller */
+		width: 30px; /* Square buttons */
+	}
+	media-volume-range {
+		height: 30px; /* Match height of buttons */
+		flex-grow: 1; /* Allow range to take available space */
+	}
+}
+
+.prose {
+	p {
+		:not(:is(h2, h3, h4, h5, h6) + p) {
+			margin-top: var(--size-7);
+		}
+
+		&:has(img) {
+			display: contents;
+		}
+	}
+
+	:is(h2, h3, h4, h5, h6) {
+		margin-top: var(--size-8);
+		margin-bottom: var(--size-3);
+	}
+
+	:is(ul, ol) {
+		list-style-type: '🔥';
+		padding-left: var(--size-5);
+	}
+
+	:is(ul, ol) li {
+		margin-block: var(--size-2);
+		padding-inline-start: var(--size-2);
+	}
+
+	pre {
+		max-inline-size: 100%;
+		padding: var(--size-3);
+		border-radius: 8px;
+		tab-size: 2;
+	}
+}
