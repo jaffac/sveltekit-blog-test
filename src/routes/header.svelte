@@ -50,7 +50,12 @@
 			>
 		</li>
 		<li>
-			<a href="/portfolio">Folio</a>
+			<a
+				href="/portfolio"
+				on:click={() => {
+					if (window.innerWidth <= 767) isMobileMenuOpen = false
+				}}>Folio</a
+			>
 		</li>
 		<li class="mobile-only-items">
 			<div class="media-player-container-mobile">
