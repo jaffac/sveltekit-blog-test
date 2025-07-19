@@ -25,6 +25,7 @@
 		on:click={toggleMobileMenu}
 		aria-expanded={isMobileMenuOpen}
 		aria-controls="mobile-nav-links"
+		aria-label="Toggle navigation menu"
 	>
 		<span class="bar"></span>
 		<span class="bar"></span>
@@ -49,13 +50,7 @@
 			>
 		</li>
 		<li>
-			<a
-				href="/rss.xml"
-				target="_blank"
-				on:click={() => {
-					if (window.innerWidth <= 767) isMobileMenuOpen = false
-				}}>RSS</a
-			>
+			<a href="/portfolio">Folio</a>
 		</li>
 		<li class="mobile-only-items">
 			<div class="media-player-container-mobile">
