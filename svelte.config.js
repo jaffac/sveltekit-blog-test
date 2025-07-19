@@ -44,7 +44,7 @@ const config = {
 			fallback: 'plaintext',
 			routes: {
 				include: ['/*'],
-				exclude: ['<all>']
+				exclude: []
 			}
 		})
 	}
