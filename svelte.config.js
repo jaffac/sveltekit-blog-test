@@ -32,14 +32,9 @@ const config = {
 	extensions: ['.svelte', '.md'],
 	preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
 	kit: {
-		adapter: adapter()
-	}
-}
-
-export default {
-	kit: {
 		adapter: adapter({
 			// See below for an explanation of these options
+			// These options are now correctly nested under the 'adapter' call
 			config: undefined,
 			platformProxy: {
 				configPath: undefined,
@@ -54,3 +49,5 @@ export default {
 		})
 	}
 }
+
+export default config // <--- This is the correct and only export default
