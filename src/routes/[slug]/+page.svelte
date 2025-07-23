@@ -8,7 +8,10 @@
 	<title>{data.meta.title}</title>
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content={data.meta.title} />
-	<meta property="og:image:secure_url" content="https://drscdn.500px.org/photo/1115223883/q%3D50_w%3D1000_of%3D1/v2?sig=dea599d7b89ed1d62b0ff5532ae544ce1a04f05d7211c3aef70312ec1934ad07" />
+	<meta
+		property="og:image:secure_url"
+		content="https://e0.pxfuel.com/wallpapers/159/358/desktop-wallpaper-100-best-water-a%C2%B7-100-s-amazing-3d-water.jpg"
+	/>
 </svelte:head>
 
 <article>
