@@ -3,7 +3,7 @@
 	import * as config from '$lib/config'
 	import 'media-chrome' // Make sure this is still here!
 
-	const radioStreamUrl = 'https://radio1.jaffac.link/listen/music/radio.mp3'
+	const radioStreamUrl = 'https://radio.jaffac.link/listen/music/radio.mp3'
 	const radioStationName = 'My Radio'
 
 	// Svelte state to manage mobile menu visibility
