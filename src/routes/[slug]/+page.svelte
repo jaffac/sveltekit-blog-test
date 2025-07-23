@@ -10,7 +10,7 @@
 	<meta property="og:title" content={data.meta.title} />
 	<meta
 		property="og:image:secure_url"
-		content="https://e0.pxfuel.com/wallpapers/159/358/desktop-wallpaper-100-best-water-a%C2%B7-100-s-amazing-3d-water.jpg"
+		content="https://500px.com/photo/1115226934/water-by-jasmin-baksic"
 	/>
 </svelte:head>
 
