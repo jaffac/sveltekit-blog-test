@@ -8,10 +8,7 @@
 	<title>{data.meta.title}</title>
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content={data.meta.title} />
-	<meta
-		property="og:image:secure_url"
-		content="https://500px.com/photo/1115226934/water-by-jasmin-baksic"
-	/>
+	<meta property="og:image" content="https://500px.com/photo/1115226934/water-by-jasmin-baksic" />
 </svelte:head>
 
 <article>
