@@ -3,8 +3,8 @@
 	import * as config from '$lib/config'
 	import 'media-chrome' // Make sure this is still here!
 
-	const radioStreamUrl = 'https://radio.jaffac.link/listen/station_247/radio.mp3'
-	const radioStationName = 'My Radio'
+	const radioStreamUrl = 'http://radio.streemlion.com:1160/stream'
+	const radioStationName = 'NordicLodgeRadio'
 
 	// Svelte state to manage mobile menu visibility
 	let isMobileMenuOpen = false
