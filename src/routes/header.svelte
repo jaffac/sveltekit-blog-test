@@ -4,7 +4,7 @@
 	import 'media-chrome' // Make sure this is still here!
 
 	const radioStreamUrl = 'http://radio.streemlion.com:1160/stream'
-	const radioStationName = 'My Radio'
+	const radioStationName = 'NordicLodgeRadio'
 
 	// Svelte state to manage mobile menu visibility
 	let isMobileMenuOpen = false
