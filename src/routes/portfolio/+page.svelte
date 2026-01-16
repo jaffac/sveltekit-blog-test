@@ -3,7 +3,7 @@
 		{
 			title: 'Booklore Self-Hosted',
 			description:
-				'A private, lightweight book tracking application. I manage my entire library here, away from big tech platforms.',
+				'A private, lightweight book tracking application. I manage my entire library here, away from big tech platforms. Built to handle massive metadata locally with a focus on speed and privacy.',
 			tags: ['Docker', 'Debian', 'Privacy'],
 			status: 'Live',
 			link: '/booklore'
@@ -11,7 +11,7 @@
 		{
 			title: 'Custom Radio Player',
 			description:
-				'Integrated Media Chrome player with real-time stream handling and CORS-compliant audio fetching.',
+				'Integrated Media Chrome player with real-time stream handling and CORS-compliant audio fetching. Optimized for Nordic Lodge Copenhagen to provide a seamless listening experience.',
 			tags: ['Svelte', 'Media Chrome', 'Audio API'],
 			status: 'Production',
 			link: '#'
@@ -19,7 +19,7 @@
 		{
 			title: 'Personal Dev Blog',
 			description:
-				'This site! A high-performance SvelteKit blog utilizing Open Props for design tokens and mdsvex for content.',
+				'This site! A high-performance SvelteKit blog utilizing Open Props for design tokens and mdsvex for content. Fast, responsive, and fully automated deployment.',
 			tags: ['SvelteKit', 'Open Props', 'Vite'],
 			status: 'Active',
 			link: '/'
@@ -27,16 +27,17 @@
 	]
 </script>
 
-<section class="portfolio-grid-wrapper">
+<section class="portfolio-vertical-wrapper">
 	<header class="portfolio-header">
 		<h1>Selected Work</h1>
+		<p class="subtitle">A deep dive into my technical projects and experiments.</p>
 	</header>
 
-	<div class="grid">
+	<div class="project-stack">
 		{#each projects as project}
-			<a href={project.link} class="card">
-				<div class="card-content">
-					<div class="card-top">
+			<a href={project.link} class="vertical-card">
+				<div class="card-body">
+					<div class="meta-row">
 						<span class="status-pill">{project.status}</span>
 						<div class="tags">
 							{#each project.tags as tag}
@@ -45,11 +46,15 @@
 						</div>
 					</div>
 
-					<h3>{project.title}</h3>
-					<p>{project.description}</p>
+					<div class="text-content">
+						<h3>{project.title}</h3>
+						<p>{project.description}</p>
+					</div>
 				</div>
-				<div class="card-footer">
-					<span>View Project →</span>
+
+				<div class="card-action">
+					<span>Explore Project</span>
+					<span class="arrow">→</span>
 				</div>
 			</a>
 		{/each}
@@ -57,15 +62,14 @@
 </section>
 
 <style>
-	.portfolio-grid-wrapper {
-		max-width: 1200px;
+	.portfolio-vertical-wrapper {
+		max-width: 900px; /* Narrower than the grid to keep lines of text readable */
 		margin-inline: auto;
-		padding: var(--size-8) var(--size-5);
+		padding: var(--size-12) var(--size-5);
 	}
 
 	.portfolio-header {
-		margin-bottom: var(--size-9);
-		text-align: center;
+		margin-bottom: var(--size-11);
 	}
 
 	.portfolio-header h1 {
@@ -74,91 +78,110 @@
 		margin-bottom: var(--size-2);
 	}
 
-	/* THE GRID */
-	.grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-		gap: var(--size-6);
+	.subtitle {
+		font-size: var(--font-size-3);
+		color: var(--text-2);
 	}
 
-	/* THE CARD */
-	.card {
+	/* THE STACK */
+	.project-stack {
+		display: flex;
+		flex-direction: column;
+		gap: var(--size-10); /* Massive space between vertical boxes */
+	}
+
+	/* THE VERTICAL CARD */
+	.vertical-card {
 		background: var(--surface-2);
 		border: 1px solid var(--border);
 		border-radius: var(--radius-3);
-		padding: var(--size-6);
+		padding: var(--size-9);
 		text-decoration: none;
 		color: inherit;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
+		gap: var(--size-6);
 		transition:
-			transform 0.2s var(--ease-2),
-			border-color 0.2s var(--ease-2),
-			background 0.2s var(--ease-2);
+			transform 0.3s var(--ease-3),
+			border-color 0.3s var(--ease-3);
 	}
 
-	.card:hover {
-		transform: translateY(-5px);
+	.vertical-card:hover {
 		border-color: var(--brand);
+		transform: scale(1.01);
 		background: var(--surface-3);
 	}
 
-	.card-top {
+	.meta-row {
 		display: flex;
 		justify-content: space-between;
-		align-items: flex-start;
-		margin-bottom: var(--size-4);
+		align-items: center;
+		margin-bottom: var(--size-6);
 	}
 
 	.status-pill {
-		font-size: var(--font-size-00);
+		font-size: var(--font-size-0);
+		font-weight: var(--font-weight-7);
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
 		background: var(--brand);
 		color: white;
-		padding: 2px 8px;
+		padding: var(--size-1) var(--size-3);
 		border-radius: var(--radius-round);
 	}
 
 	.tags {
 		display: flex;
-		gap: 4px;
-		flex-wrap: wrap;
-		justify-content: flex-end;
+		gap: var(--size-2);
 	}
 
 	.tag {
 		font-family: var(--font-monospace-code);
-		font-size: var(--font-size-00);
+		font-size: var(--font-size-0);
 		color: var(--text-2);
 		background: var(--surface-4);
-		padding: 2px 6px;
+		padding: var(--size-1) var(--size-2);
 		border-radius: var(--radius-1);
 	}
 
 	h3 {
-		font-size: var(--font-size-4);
-		margin-bottom: var(--size-2);
+		font-size: var(--font-size-6); /* Large, bold titles */
+		margin-bottom: var(--size-3);
 		color: var(--text-1);
 	}
 
 	p {
-		font-size: var(--font-size-1);
+		font-size: var(--font-size-3); /* Larger body text like the About page */
 		color: var(--text-2);
-		line-height: var(--font-lineheight-3);
+		line-height: var(--font-lineheight-4);
+		max-width: 65ch; /* Keeps description width comfortable to read */
 	}
 
-	.card-footer {
+	.card-action {
 		margin-top: var(--size-6);
-		font-weight: var(--font-weight-6);
+		display: flex;
+		align-items: center;
+		gap: var(--size-2);
+		font-weight: var(--font-weight-7);
 		color: var(--brand);
-		font-size: var(--font-size-1);
+		font-size: var(--font-size-3);
 	}
 
-	@media (max-width: 768px) {
-		.grid {
-			grid-template-columns: 1fr;
+	.arrow {
+		transition: transform 0.2s var(--ease-3);
+	}
+
+	.vertical-card:hover .arrow {
+		transform: translateX(10px);
+	}
+
+	@media (max-width: 600px) {
+		.vertical-card {
+			padding: var(--size-6);
+		}
+		.meta-row {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: var(--size-3);
 		}
 	}
 </style>
