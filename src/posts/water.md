@@ -13,7 +13,7 @@ categories:
 published: true
 ---
 
-##
+## Introduction
 
 Water. It's everywhere, it's essential, and yet, many of us don't drink enough of it. In a world obsessed with superfoods and complex workout routines, the humble act of **staying hydrated** often gets overlooked. But what if I told you that simply drinking more water could be one of the most impactful, yet easiest, health improvements you could make?
 

@@ -1,12 +1,11 @@
 <script lang="ts">
-	import Toggle from './toggle.svelte' // This is your light/dark mode toggle
+	import Toggle from './toggle.svelte'
 	import * as config from '$lib/config'
-	import 'media-chrome' // Make sure this is still here!
+	import 'media-chrome'
 
-	const radioStreamUrl = 'https://radio.jaffac.link/listen/home/radio.mp3'
-	const radioStationName = 'Radio'
+	const radioStreamUrl = 'https://radio.streemlion.com:1760/stream'
+	const radioStationName = 'Nordic Lodge Copenhagen'
 
-	// Svelte state to manage mobile menu visibility
 	let isMobileMenuOpen = false
 
 	function toggleMobileMenu() {
@@ -57,15 +56,11 @@
 				}}>Folio</a
 			>
 		</li>
+
 		<li class="mobile-only-items">
 			<div class="media-player-container-mobile">
 				<media-controller audio class="header-media-player">
-					<audio
-						slot="media"
-						src={radioStreamUrl}
-						preload="none"
-						aria-label="{radioStationName} Stream"
-					></audio>
+					<audio slot="media" src={radioStreamUrl} crossorigin="anonymous" preload="none"></audio>
 					<media-control-bar>
 						<media-play-button></media-play-button>
 						<media-time-display class="player-label"></media-time-display>
@@ -75,16 +70,12 @@
 				</media-controller>
 			</div>
 		</li>
-		<li class="mobile-only-items">
-			<Toggle />
-		</li>
+		<li class="mobile-only-items"><Toggle /></li>
 	</ul>
 
 	<div class="desktop-media-player-container">
 		<media-controller audio class="header-media-player">
-			<audio slot="media" src={radioStreamUrl} preload="none" aria-label="{radioStationName} Stream"
-			></audio>
-
+			<audio slot="media" src={radioStreamUrl} crossorigin="anonymous" preload="none"></audio>
 			<media-control-bar>
 				<media-play-button></media-play-button>
 				<media-time-display class="player-label"></media-time-display>
@@ -94,64 +85,54 @@
 		</media-controller>
 	</div>
 
-	<div class="desktop-toggle-container">
-		<Toggle />
-	</div>
+	<div class="desktop-toggle-container"><Toggle /></div>
 </nav>
 
 <style>
-	/* Reset base nav styles to allow for controlled mobile behavior */
+	/* ... Navigation styles same as before ... */
 	nav.main-nav-wrapper {
 		padding-block: var(--size-7);
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		gap: var(--size-4); /* Space between main items */
-		position: relative; /* For absolute positioning of mobile nav */
-		z-index: 10; /* Ensure nav is on top */
+		gap: var(--size-4);
+		position: relative;
+		z-index: 10;
 	}
-
 	nav .title {
-		margin-right: auto; /* Push other items to the right */
-		margin-left: -10px; /* Adjust as needed for alignment */
+		margin-right: auto;
+		margin-left: -10px;
 		font-size: var(--font-size-fluid-3);
 	}
-
-	/* Desktop Navigation Links */
 	nav .links {
-		display: flex; /* Always flex on desktop */
+		display: flex;
 		gap: var(--size-7);
 		margin-block: 0;
 		list-style: none;
 		padding: 0;
 	}
-
 	nav a {
 		color: inherit;
 		text-decoration: none;
 	}
-
-	/* Desktop Media Player Container */
 	.desktop-media-player-container {
 		flex-shrink: 0;
 		margin-top: 12px;
 		margin-left: var(--size-4);
 	}
-
-	/* Desktop Toggle Container */
 	.desktop-toggle-container {
 		flex-shrink: 0;
-		margin-left: var(--size-4); /* Add space between player and toggle */
+		margin-left: var(--size-4);
 	}
 
-	/* --- Hamburger Menu Button --- */
+	/* Hamburger Menu Styles */
 	.menu-toggle {
-		display: none; /* <-- CRITICAL FIX: Hide by default on ALL screens */
+		display: none;
 		background: none;
 		border: none;
 		cursor: pointer;
 		padding: var(--size-2);
-		flex-direction: column; /* This is fine, but won't apply if display is none */
+		flex-direction: column;
 		gap: 4px;
 		justify-content: center;
 		align-items: center;
@@ -159,7 +140,6 @@
 		height: 40px;
 		z-index: 20;
 	}
-
 	.menu-toggle .bar {
 		display: block;
 		width: 28px;
@@ -168,8 +148,6 @@
 		border-radius: 2px;
 		transition: all 0.3s ease-in-out;
 	}
-
-	/* Hamburger icon animation when open */
 	.menu-toggle.is-active .bar:nth-child(1) {
 		transform: translateY(7px) rotate(45deg);
 	}
@@ -180,46 +158,48 @@
 		transform: translateY(-7px) rotate(-45deg);
 	}
 
-	/* --- MEDIA-CHROME PLAYER STYLING (remains unchanged) --- */
+	/* --- MEDIA-CHROME PLAYER REFINEMENT --- */
 	.header-media-player {
 		width: 250px;
 		height: 40px;
 		font-size: 0.9em;
 
+		/* FIX: Remove the 'backlight' glow from all buttons on hover */
+		--media-control-hover-background: transparent;
+
 		--media-background-color: transparent;
 		--media-control-background: transparent;
-		--media-control-hover-background: var(--surface-4);
-
 		--media-range-thumb-color: var(--brand);
 		--media-range-track-color: var(--text-2);
 		--media-range-track-active-color: var(--brand);
 
-		--media-focus-color: var(--link);
+		/* FIX: Precision alignment for the volume track */
+		--media-range-track-height: 4px;
+		--media-range-thumb-height: 10px;
+		--media-range-thumb-width: 10px;
+
+		/* FIX: Removing focus backlight glow */
+		--media-focus-box-shadow: none;
+
 		--media-font-family: var(--font-system-ui);
 		--media-button-border-radius: var(--radius-round);
 
 		& .player-label {
 			font-weight: var(--font-weight-bold);
-		}
-
-		media-control-bar > * {
-			height: 30px;
-			width: 30px;
-		}
-		media-volume-range {
-			height: 30px;
-			flex-grow: 1;
+			min-width: 50px; /* Ensures timer doesn't jump around */
 		}
 	}
 
-	/* Mobile specific elements (hidden on desktop) */
+	media-volume-range {
+		outline: none;
+	}
+
+	/* Mobile logic same as before */
 	.mobile-only-items {
 		display: none;
 		width: 100%;
 		margin-top: var(--size-4);
 	}
-
-	/* Adjust player for mobile menu */
 	.media-player-container-mobile {
 		width: 100%;
 		text-align: center;
@@ -227,35 +207,17 @@
 	.media-player-container-mobile .header-media-player {
 		width: 100%;
 		max-width: 300px;
-		height: 50px;
 	}
 
-	/* --- Media Queries for Mobile --- */
 	@media (max-width: 767px) {
-		nav.main-nav-wrapper {
-			flex-wrap: wrap;
-			align-items: flex-start;
-			position: relative;
-		}
-
-		nav .title {
-			margin-bottom: 0;
-			margin-right: auto;
-		}
-
-		/* CRITICAL FIX: ONLY show the hamburger menu button on small screens */
 		.menu-toggle {
-			display: flex; /* <-- IMPORTANT: OVERRIDE default 'display: none' */
+			display: flex;
 			margin-left: auto;
 		}
-
-		/* Hide desktop specific elements */
 		.desktop-media-player-container,
 		.desktop-toggle-container {
 			display: none;
 		}
-
-		/* Hide the regular links on mobile by default */
 		nav .links {
 			position: absolute;
 			top: 100%;
@@ -265,37 +227,14 @@
 			border-top: 1px solid var(--border);
 			max-height: 0;
 			overflow: hidden;
-			transition:
-				max-height 0.3s ease-out,
-				padding 0.3s ease-out;
+			transition: max-height 0.3s ease-out;
 			padding: 0 var(--size-4);
 			flex-direction: column;
-			align-items: flex-start;
 		}
-
-		/* When the mobile menu is open (JavaScript adds is-open class) */
 		nav .links.is-open {
-			max-height: 500px; /* Or enough height to show all items. Adjust as needed. */
+			max-height: 500px;
 			padding: var(--size-4);
 		}
-
-		nav .links li {
-			width: 100%;
-			margin-block: var(--size-2);
-		}
-
-		nav .links a {
-			display: block;
-			width: 100%;
-			padding: var(--size-3) var(--size-4);
-			background-color: var(--surface-3);
-			border-radius: var(--radius-2);
-		}
-		nav .links a:hover {
-			background-color: var(--surface-3);
-		}
-
-		/* Show mobile-only items within the expanded menu */
 		.mobile-only-items {
 			display: block;
 		}
