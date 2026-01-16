@@ -2,32 +2,45 @@
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
-	import * as config from '$lib/config' // Import your new config
+	import * as config from '$lib/config'
 
 	import 'open-props/style'
 	import 'open-props/normalize'
 	import 'open-props/buttons'
 	import '../app.css'
 
-	let { children, data } = $props()
+	// This interface fixes the "Property meta does not exist" error
+	interface Props {
+		children?: import('svelte').Snippet
+		data: {
+			url: string
+			meta?: {
+				title?: string
+				description?: string
+			}
+		}
+	}
+
+	let { children, data }: Props = $props()
 </script>
 
 <svelte:head>
-	<title>{config.title}</title>
-	<meta name="description" content={config.description} />
+	<title>{data.meta?.title ? `${data.meta.title} | ${config.title}` : config.title}</title>
+	<meta name="description" content={data.meta?.description || config.description} />
 
 	<meta property="og:site_name" content={config.title} />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content={config.url} />
-	<meta property="og:title" content={config.title} />
-	<meta property="og:description" content={config.description} />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content={data.url} />
+	<meta property="og:title" content={data.meta?.title || config.title} />
+	<meta property="og:description" content={data.meta?.description || config.description} />
 	<meta property="og:image" content="{config.url}/og-image.png" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
 
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content={config.title} />
-	<meta name="twitter:description" content={config.description} />
+	<meta name="twitter:url" content={data.url} />
+	<meta name="twitter:title" content={data.meta?.title || config.title} />
+	<meta name="twitter:description" content={data.meta?.description || config.description} />
 	<meta name="twitter:image" content="{config.url}/og-image.png" />
 </svelte:head>
 
@@ -59,5 +72,20 @@
 		main {
 			padding-block: var(--size-9);
 		}
+	}
+
+	/* Global override to remove those gray circles/bubbles around tags */
+	:global(.tags a) {
+		background: none !important;
+		border: none !important;
+		box-shadow: none !important;
+		padding: 0 !important;
+		color: var(--orange-5) !important;
+		text-decoration: none;
+		font-weight: var(--font-weight-6);
+	}
+
+	:global(.tags a:hover) {
+		text-decoration: underline !important;
 	}
 </style>
