@@ -8,7 +8,7 @@
 	<title>{data.meta.title}</title>
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content={data.meta.title} />
-	<meta property="og:image" content="https://500px.com/photo/1115226934/water-by-jasmin-baksic" />
+	<meta property="og:image" content="https://blog.jaffac.link/og-image.png" />
 </svelte:head>
 
 <article>
@@ -19,7 +19,7 @@
 
 	<div class="tags">
 		{#each data.meta.categories as category}
-			<span class="surface-4">&num;{category}</span>
+			<span class="tag">&num;{category}</span>
 		{/each}
 	</div>
 
@@ -48,9 +48,12 @@
 			gap: var(--size-3);
 			margin-top: var(--size-7);
 
-			> * {
-				padding: var(--size-2) var(--size-3);
-				border-radius: var(--radius-round);
+			/* Clean text style, no bubbles */
+			.tag {
+				color: var(--text-2);
+				font-family: var(--font-monospace-code);
+				font-size: var(--font-size-1);
+				/* Removed padding and surface background */
 			}
 		}
 	}
