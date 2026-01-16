@@ -1,175 +1,164 @@
 <script>
-	// The same project data works perfectly here.
-	// We'll just display it differently.
 	const projects = [
 		{
-			title: 'Project One: Video Showcase',
+			title: 'Booklore Self-Hosted',
 			description:
-				'This project demonstrates the use of Media Chrome for a custom video player, styled according to the global theme. It highlights advanced frontend capabilities.',
-			tags: ['SvelteKit', 'Media Chrome', 'CSS Variables', 'HLS'],
-			liveUrl: '#',
-			repoUrl: '#'
+				'A private, lightweight book tracking application. I manage my entire library here, away from big tech platforms.',
+			tags: ['Docker', 'Debian', 'Privacy'],
+			status: 'Live',
+			link: '/booklore'
 		},
 		{
-			title: 'Project Two: Data Visualization',
+			title: 'Custom Radio Player',
 			description:
-				'An interactive dashboard for visualizing complex datasets. Built with performance and accessibility in mind, using the Atkinson Hyperlegible font you specified.',
-			tags: ['Svelte', 'D3.js', 'API', 'JavaScript'],
-			liveUrl: '#',
-			repoUrl: '#'
+				'Integrated Media Chrome player with real-time stream handling and CORS-compliant audio fetching.',
+			tags: ['Svelte', 'Media Chrome', 'Audio API'],
+			status: 'Production',
+			link: '#'
 		},
 		{
-			title: 'Project Three: E-commerce Platform',
+			title: 'Personal Dev Blog',
 			description:
-				'A full-featured online store with a custom backend. The design uses the surface color system to create a clean, layered user interface.',
-			tags: ['SvelteKit', 'Node.js', 'Stripe', 'PostgreSQL'],
-			liveUrl: '#',
-			repoUrl: '#'
-		},
-		{
-			title: 'Project Four: Personal Blog',
-			description:
-				'The very blog you are on! Built from the ground up to be lightweight, fast, and fully responsive with a custom dark/light theme switcher.',
-			tags: ['SvelteKit', 'Markdown', 'Open Props'],
-			liveUrl: '#',
-			repoUrl: '#'
+				'This site! A high-performance SvelteKit blog utilizing Open Props for design tokens and mdsvex for content.',
+			tags: ['SvelteKit', 'Open Props', 'Vite'],
+			status: 'Active',
+			link: '/'
 		}
 	]
-
-	// Self-contained SVG icons are still useful for the links
-	const icons = {
-		github:
-			'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>',
-		externalLink:
-			'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>'
-	}
 </script>
 
-<section class="portfolio-container prose">
-	<header>
-		<h1>My Work</h1>
-		<p>A list of selected projects I've worked on.</p>
+<section class="portfolio-grid-wrapper">
+	<header class="portfolio-header">
+		<h1>Selected Work</h1>
 	</header>
 
-	<ul class="project-list">
+	<div class="grid">
 		{#each projects as project}
-			<li class="project-item">
-				<h2>
-					<a href={project.liveUrl || project.repoUrl} target="_blank" rel="noopener noreferrer">
-						{project.title}
-					</a>
-				</h2>
+			<a href={project.link} class="card">
+				<div class="card-content">
+					<div class="card-top">
+						<span class="status-pill">{project.status}</span>
+						<div class="tags">
+							{#each project.tags as tag}
+								<span class="tag">{tag}</span>
+							{/each}
+						</div>
+					</div>
 
-				<p>{project.description}</p>
-
-				<p class="tech-stack">
-					<strong>Built with:</strong>
-					{project.tags.join(', ')}
-				</p>
-
-				<div class="project-links">
-					{#if project.liveUrl}
-						<a href={project.liveUrl} class="cta-link" target="_blank" rel="noopener noreferrer">
-							{@html icons.externalLink}
-							<span>Live Demo</span>
-						</a>
-					{/if}
-					{#if project.repoUrl}
-						<a href={project.repoUrl} class="cta-link" target="_blank" rel="noopener noreferrer">
-							{@html icons.github}
-							<span>Source Code</span>
-						</a>
-					{/if}
+					<h3>{project.title}</h3>
+					<p>{project.description}</p>
 				</div>
-			</li>
+				<div class="card-footer">
+					<span>View Project →</span>
+				</div>
+			</a>
 		{/each}
-	</ul>
+	</div>
 </section>
 
 <style>
-	/* All styles use the CSS variables from your global stylesheet */
-	.portfolio-container {
-		padding-top: 0, 9rem;
-		max-width: 150ch; /* Increased from 70ch to 90ch, or even more like 120ch */
+	.portfolio-grid-wrapper {
+		max-width: 1200px;
 		margin-inline: auto;
+		padding: var(--size-8) var(--size-5);
 	}
 
-	header {
-		margin-bottom: var(--size-fluid-7);
-		border-bottom: 1px solid var(--border);
-		padding-bottom: var(--size-5);
+	.portfolio-header {
+		margin-bottom: var(--size-9);
+		text-align: center;
 	}
 
-	header h1 {
-		color: var(--brand); /* Using your brand color for the main title */
+	.portfolio-header h1 {
 		font-size: var(--font-size-8);
-	}
-
-	/* The .prose class from your global CSS will style most of the text */
-	.prose h2 {
-		font-size: var(--font-size-4);
+		color: var(--brand);
 		margin-bottom: var(--size-2);
 	}
 
-	.prose h2 a {
-		color: var(--text-1);
+	/* THE GRID */
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: var(--size-6);
+	}
+
+	/* THE CARD */
+	.card {
+		background: var(--surface-2);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-3);
+		padding: var(--size-6);
 		text-decoration: none;
-		border-bottom: 2px solid transparent;
-		transition: border-color 0.2s ease-in-out;
-	}
-
-	.prose h2 a:hover {
-		border-bottom-color: var(--brand);
-	}
-
-	.project-list {
-		list-style: none;
-		padding: 0;
-	}
-
-	.project-item {
-		padding: var(--size-6) 0;
-		border-bottom: 1px solid var(--border);
-	}
-
-	.project-item:first-child {
-		padding-top: var(--size-5);
-	}
-
-	.project-item:last-child {
-		border-bottom: none;
-	}
-
-	.tech-stack {
-		font-family: var(--font-monospace-code);
-		font-size: var(--font-size-0);
-		color: var(--text-2);
-	}
-
-	.project-links {
+		color: inherit;
 		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		transition:
+			transform 0.2s var(--ease-2),
+			border-color 0.2s var(--ease-2),
+			background 0.2s var(--ease-2);
+	}
+
+	.card:hover {
+		transform: translateY(-5px);
+		border-color: var(--brand);
+		background: var(--surface-3);
+	}
+
+	.card-top {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		margin-bottom: var(--size-4);
+	}
+
+	.status-pill {
+		font-size: var(--font-size-00);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		background: var(--brand);
+		color: white;
+		padding: 2px 8px;
+		border-radius: var(--radius-round);
+	}
+
+	.tags {
+		display: flex;
+		gap: 4px;
 		flex-wrap: wrap;
-		gap: var(--size-5);
-		margin-top: var(--size-4);
+		justify-content: flex-end;
 	}
 
-	.cta-link {
-		display: inline-flex;
-		align-items: center;
-		gap: var(--size-2);
-		color: var(--link);
-		text-decoration: none;
-		font-weight: 500;
-		transition: color 0.2s ease;
+	.tag {
+		font-family: var(--font-monospace-code);
+		font-size: var(--font-size-00);
+		color: var(--text-2);
+		background: var(--surface-4);
+		padding: 2px 6px;
+		border-radius: var(--radius-1);
 	}
 
-	.cta-link:hover {
+	h3 {
+		font-size: var(--font-size-4);
+		margin-bottom: var(--size-2);
+		color: var(--text-1);
+	}
+
+	p {
+		font-size: var(--font-size-1);
+		color: var(--text-2);
+		line-height: var(--font-lineheight-3);
+	}
+
+	.card-footer {
+		margin-top: var(--size-6);
+		font-weight: var(--font-weight-6);
 		color: var(--brand);
+		font-size: var(--font-size-1);
 	}
 
-	.cta-link :global(svg) {
-		width: 18px;
-		height: 18px;
-		stroke: currentColor;
+	@media (max-width: 768px) {
+		.grid {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>
