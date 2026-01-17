@@ -4,8 +4,10 @@
 
 	let { data } = $props()
 
-	// Focus only on the most recent/featured post
+	// Top post for the "Hero"
 	let featuredPost = $derived(data.posts[0])
+	// The rest of the library for mobile visibility
+	let archivePosts = $derived(data.posts.slice(1))
 </script>
 
 <svelte:head>
@@ -31,6 +33,20 @@
 				<a href={featuredPost.slug} class="read-link">Read entry —</a>
 			</footer>
 		</article>
+
+		<div class="mobile-archive">
+			<h2 class="mobile-label">Library Archive</h2>
+			<ul class="mobile-list">
+				{#each archivePosts as post}
+					<li class="mobile-item">
+						<span class="mobile-date">
+							{post.date.split('-')[2]}.{parseInt(post.date.split('-')[1])}
+						</span>
+						<a href="/{post.slug}" class="mobile-link">{post.title}</a>
+					</li>
+				{/each}
+			</ul>
+		</div>
 	{:else}
 		<p class="empty-state">The lodge is quiet. No entries found.</p>
 	{/if}
@@ -103,8 +119,54 @@
 		text-decoration: none;
 	}
 
-	.read-link:hover {
-		text-decoration: underline;
+	/* --- MOBILE ARCHIVE SECTION --- */
+	.mobile-archive {
+		display: none; /* Hidden on Desktop */
+		margin-top: var(--size-12);
+		padding-top: var(--size-10);
+		border-top: 1px solid var(--home-border);
+	}
+
+	.mobile-label {
+		font-family: var(--font-mono);
+		font-size: var(--font-size-00);
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		color: var(--orange-5);
+		margin-bottom: var(--size-8);
+	}
+
+	.mobile-list {
+		list-style: none;
+		padding: 0;
+		display: grid;
+		gap: var(--size-7);
+	}
+
+	.mobile-item {
+		display: flex;
+		flex-direction: column;
+		gap: var(--size-1);
+	}
+
+	.mobile-date {
+		font-family: var(--font-mono);
+		font-size: var(--font-size-00);
+		color: var(--home-muted);
+	}
+
+	.mobile-link {
+		color: var(--home-text) !important;
+		text-decoration: none;
+		font-size: var(--font-size-2);
+		font-weight: var(--font-weight-6);
+	}
+
+	/* Activate Mobile List only when Sidebar is hidden */
+	@media (max-width: 1024px) {
+		.mobile-archive {
+			display: block;
+		}
 	}
 
 	.empty-state {
