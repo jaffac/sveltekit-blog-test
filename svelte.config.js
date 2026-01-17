@@ -6,28 +6,25 @@ import { createHighlighter } from 'shiki'
 import remarkToc from 'remark-toc'
 import rehypeSlug from 'rehype-slug'
 import path from 'path'
-import { fileURLToPath } from 'url' // Required for ESM paths
+import { fileURLToPath } from 'url'
 
-// This calculates the absolute path to your 'sveltekit-blog-test' folder
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-// We create the highlighter once outside the config to make builds much faster
+// Pre-loading languages here makes the build much faster
 const highlighter = await createHighlighter({
 	themes: ['poimandres'],
-	langs: ['javascript', 'typescript', 'css', 'html']
+	langs: ['javascript', 'typescript', 'css', 'html', 'json', 'bash']
 })
 
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
 	extensions: ['.md'],
 	layout: {
-		// FIXED: Using path.join with __dirname ensures it finds the file
-		// inside sveltekit-blog-test/src/mdsvex.svelte
 		_: path.join(__dirname, 'src', 'mdsvex.svelte')
 	},
 	highlight: {
 		highlighter: async (code, lang = 'text') => {
-			await highlighter.loadLanguage('javascript', 'typescript', 'css', 'html')
+			// No need to load languages inside here anymore; they are pre-loaded above
 			const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'poimandres' }))
 			return `{@html \`${html}\` }`
 		}
@@ -41,7 +38,10 @@ const config = {
 	extensions: ['.svelte', '.md'],
 	preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
 	kit: {
-		adapter: adapter(),
+		// FIX: Explicitly set the runtime to match your Debian Node version
+		adapter: adapter({
+			runtime: 'nodejs22.x'
+		}),
 		alias: {
 			$components: 'src/lib/components'
 		}

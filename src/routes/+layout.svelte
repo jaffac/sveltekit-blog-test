@@ -5,6 +5,7 @@
 	import * as config from '$lib/config'
 
 	import { dev } from '$app/environment'
+	import { inject } from '@vercel/analytics' // Add this
 	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit'
 
 	import 'open-props/style'
@@ -12,7 +13,9 @@
 	import 'open-props/buttons'
 	import '../app.css'
 
+	// This block prevents local 404s by only running on Vercel
 	if (!dev) {
+		inject()
 		injectSpeedInsights()
 	}
 
