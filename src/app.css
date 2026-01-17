@@ -1,7 +1,7 @@
 @import '@fontsource/atkinson-hyperlegible';
 @import '@fontsource/jetbrains-mono';
 
-/* 1. GLOBAL VARIABLES & SCROLLBAR FIX */
+/* 1. GLOBAL VARIABLES & LAYOUT FIXES */
 html {
 	/* Fonts */
 	--font-system-ui: 'Atkinson Hyperlegible', sans-serif;
@@ -34,7 +34,7 @@ html {
 	--border-light: var(--gray-4);
 	--link-light: var(--indigo-8);
 
-	/* Media Chrome Vars (Dynamic Assignment) */
+	/* Media Chrome Variables */
 	--media-primary-color-dark: var(--brand-dark);
 	--media-secondary-color-dark: var(--gray-11);
 	--media-icon-color-dark: var(--text-1-dark);
@@ -46,8 +46,9 @@ html {
 	--media-control-background-light: var(--gray-2);
 }
 
-/* 2. THEME ASSIGNMENT */
-:root {
+/* 2. THEME ASSIGNMENT (Combined for standard CSS support) */
+:root,
+[color-scheme='dark'] {
 	color-scheme: dark;
 	--brand: var(--brand-dark);
 	--text-1: var(--text-1-dark);
@@ -66,7 +67,6 @@ html {
 	--media-control-background: var(--media-control-background-dark);
 }
 
-/* Light Mode Override */
 @media (prefers-color-scheme: light) {
 	:root {
 		color-scheme: light;
@@ -88,15 +88,23 @@ html {
 	}
 }
 
-/* Attributes for Manual Toggle */
-[color-scheme='dark'] {
-	@extend :root;
-}
 [color-scheme='light'] {
 	color-scheme: light;
 	--brand: var(--brand-light);
 	--text-1: var(--text-1-light);
-	/* ... repeat the --vars from the light media query if using a manual toggle ... */
+	--text-2: var(--text-2-light);
+	--surface-1: var(--surface-1-light);
+	--surface-2: var(--surface-2-light);
+	--surface-3: var(--surface-3-light);
+	--surface-4: var(--surface-4-light);
+	--background: var(--background-light);
+	--border: var(--border-light);
+	--link: var(--link-light);
+
+	--media-primary-color: var(--media-primary-color-light);
+	--media-secondary-color: var(--media-secondary-color-light);
+	--media-icon-color: var(--media-icon-color-light);
+	--media-control-background: var(--media-control-background-light);
 }
 
 /* 3. BASE STYLES */
@@ -112,7 +120,15 @@ html {
 	accent-color: var(--link);
 	background-image: var(--background);
 	background-attachment: fixed;
-	background-color: var(--surface-1); /* Fallback */
+	background-color: var(--surface-1);
+}
+
+/* FIX: Align Header items vertically so player isn't "down" */
+header,
+nav {
+	display: flex;
+	align-items: center;
+	gap: var(--size-4);
 }
 
 img {
@@ -136,6 +152,12 @@ img {
 	width: 250px;
 	height: 30px;
 	font-size: 0.9em;
+
+	/* FIX: Ensure the component internal alignment matches the nav line */
+	display: inline-flex;
+	align-items: center;
+	vertical-align: middle;
+
 	--media-background-color: transparent;
 	--media-control-background: transparent;
 	--media-control-hover-background: var(--surface-3);
