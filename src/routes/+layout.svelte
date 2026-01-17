@@ -35,13 +35,14 @@
 	<title>{data.meta?.title ? `${data.meta.title} | ${config.title}` : config.title}</title>
 	<meta name="description" content={data.meta?.description || config.description} />
 
-	<link rel="alternate" type="application/rss+xml" title={config.title} href="/rss.xml" />
+	<link rel="alternate" type="application/rss+xml" title={config.title} href="/rss" />
+	<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap" />
 
 	<link rel="canonical" href="{config.url}{data.url}" />
 
 	<meta property="og:site_name" content={config.title} />
 	<meta property="og:type" content="article" />
-	<meta property="og:url" content={data.url} />
+	<meta property="og:url" content="{config.url}{data.url}" />
 	<meta property="og:title" content={data.meta?.title || config.title} />
 	<meta property="og:description" content={data.meta?.description || config.description} />
 	<meta property="og:image" content="{config.url}/og-image.png" />
@@ -49,7 +50,7 @@
 	<meta property="og:image:height" content="630" />
 
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:url" content={data.url} />
+	<meta name="twitter:url" content="{config.url}{data.url}" />
 	<meta name="twitter:title" content={data.meta?.title || config.title} />
 	<meta name="twitter:description" content={data.meta?.description || config.description} />
 	<meta name="twitter:image" content="{config.url}/og-image.png" />
@@ -106,7 +107,6 @@
 		--side-border: var(--gray-9);
 	}
 
-	/* Target Lite Mode - System Preference */
 	@media (prefers-color-scheme: light) {
 		.layout {
 			--side-text: var(--gray-7) !important;
@@ -116,7 +116,6 @@
 		}
 	}
 
-	/* Target Lite Mode - Manual Toggle */
 	:global([color-scheme='light']) .layout {
 		--side-text: var(--gray-7) !important;
 		--side-link: var(--gray-8) !important;
@@ -231,7 +230,6 @@
 		}
 	}
 
-	/* Globals for Tags */
 	:global(.tags a) {
 		background: none !important;
 		border: none !important;

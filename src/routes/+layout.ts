@@ -1,12 +1,19 @@
+import type { LayoutLoad } from './$types'
+
 export const prerender = true
 
-export async function load({ url, fetch }) {
-	// Fetch the posts from your existing API or helper
+export const load: LayoutLoad = async ({ url, fetch }) => {
+	// SvelteKit's fetch handles absolute paths correctly during prerendering
 	const response = await fetch('/api/posts')
+
+	if (!response.ok) {
+		throw new Error(`Failed to load posts for layout: ${response.status}`)
+	}
+
 	const posts = await response.json()
 
 	return {
 		url: url.pathname,
-		posts: posts // This now goes to your layout props
+		posts: posts
 	}
 }

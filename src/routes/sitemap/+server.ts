@@ -1,9 +1,10 @@
+import type { RequestHandler } from './$types'
 import * as config from '$lib/config'
 import type { Post } from '$lib/types'
 
-export async function GET({ fetch }) {
+export const GET: RequestHandler = async ({ fetch }) => {
 	try {
-		// 1. Fixed the path with a leading slash for Vercel
+		// Use leading slash for internal SvelteKit fetch
 		const response = await fetch('/api/posts')
 
 		if (!response.ok) {
@@ -45,7 +46,7 @@ export async function GET({ fetch }) {
 		return new Response(xml, { headers })
 	} catch (error) {
 		console.error('Sitemap generation error:', error)
-		// Return a basic sitemap if the fetch fails during build
+		// Fallback sitemap to prevent build crash
 		return new Response(
 			`<?xml version="1.0" encoding="UTF-8"?>
             <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
