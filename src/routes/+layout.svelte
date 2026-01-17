@@ -34,6 +34,11 @@
 <svelte:head>
 	<title>{data.meta?.title ? `${data.meta.title} | ${config.title}` : config.title}</title>
 	<meta name="description" content={data.meta?.description || config.description} />
+
+	<link rel="alternate" type="application/rss+xml" title={config.title} href="/rss.xml" />
+
+	<link rel="canonical" href="{config.url}{data.url}" />
+
 	<meta property="og:site_name" content={config.title} />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content={data.url} />
@@ -42,6 +47,7 @@
 	<meta property="og:image" content="{config.url}/og-image.png" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
+
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:url" content={data.url} />
 	<meta name="twitter:title" content={data.meta?.title || config.title} />
