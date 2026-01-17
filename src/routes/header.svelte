@@ -3,11 +3,13 @@
 	import * as config from '$lib/config'
 	import { dev } from '$app/environment'
 	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit'
+	import { injectAnalytics } from '@vercel/analytics/sveltekit' // ADD THIS
 	import 'media-chrome'
 
-	// Initialize Vercel Speed Insights (only in production)
+	// Initialize both (only in production)
 	if (!dev) {
 		injectSpeedInsights()
+		injectAnalytics() // ADD THIS
 	}
 
 	const radioStreamUrl = 'https://radio.streemlion.com:1760/stream'
