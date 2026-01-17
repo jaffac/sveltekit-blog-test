@@ -1,15 +1,27 @@
 <script lang="ts">
 	import Toggle from './toggle.svelte'
 	import * as config from '$lib/config'
+	import { dev } from '$app/environment'
+	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit'
 	import 'media-chrome'
 
+	// Initialize Vercel Speed Insights (only in production)
+	if (!dev) {
+		injectSpeedInsights()
+	}
+
 	const radioStreamUrl = 'https://radio.streemlion.com:1760/stream'
-	const radioStationName = 'Nordic Lodge Copenhagen'
 
 	let isMobileMenuOpen = false
 
 	function toggleMobileMenu() {
 		isMobileMenuOpen = !isMobileMenuOpen
+	}
+
+	function closeMenu() {
+		if (window.innerWidth <= 767) {
+			isMobileMenuOpen = false
+		}
 	}
 </script>
 
@@ -32,30 +44,9 @@
 	</button>
 
 	<ul class="links" id="mobile-nav-links" class:is-open={isMobileMenuOpen}>
-		<li>
-			<a
-				href="/about"
-				on:click={() => {
-					if (window.innerWidth <= 767) isMobileMenuOpen = false
-				}}>About</a
-			>
-		</li>
-		<li>
-			<a
-				href="/contact"
-				on:click={() => {
-					if (window.innerWidth <= 767) isMobileMenuOpen = false
-				}}>Contact</a
-			>
-		</li>
-		<li>
-			<a
-				href="/portfolio"
-				on:click={() => {
-					if (window.innerWidth <= 767) isMobileMenuOpen = false
-				}}>Folio</a
-			>
-		</li>
+		<li><a href="/about" on:click={closeMenu}>About</a></li>
+		<li><a href="/contact" on:click={closeMenu}>Contact</a></li>
+		<li><a href="/portfolio" on:click={closeMenu}>Folio</a></li>
 
 		<li class="mobile-only-items">
 			<div class="media-player-container-mobile">
@@ -89,7 +80,6 @@
 </nav>
 
 <style>
-	/* ... Navigation styles same as before ... */
 	nav.main-nav-wrapper {
 		padding-block: var(--size-7);
 		display: flex;
@@ -99,11 +89,15 @@
 		position: relative;
 		z-index: 10;
 	}
+
 	nav .title {
 		margin-right: auto;
 		margin-left: -10px;
 		font-size: var(--font-size-fluid-3);
+		color: inherit;
+		text-decoration: none;
 	}
+
 	nav .links {
 		display: flex;
 		gap: var(--size-7);
@@ -111,24 +105,16 @@
 		list-style: none;
 		padding: 0;
 	}
+
 	nav a {
 		color: inherit;
 		text-decoration: none;
 	}
-	.desktop-media-player-container {
-		flex-shrink: 0;
-		margin-top: 12px;
-		margin-left: var(--size-4);
-	}
-	.desktop-toggle-container {
-		flex-shrink: 0;
-		margin-left: var(--size-4);
-	}
 
-	/* Hamburger Menu Styles */
+	/* Hamburger Menu Styles & The "Pill" Fix */
 	.menu-toggle {
 		display: none;
-		background: none;
+		background: transparent !important;
 		border: none;
 		cursor: pointer;
 		padding: var(--size-2);
@@ -139,7 +125,22 @@
 		width: 40px;
 		height: 40px;
 		z-index: 20;
+
+		/* Removes the gray tap box on mobile */
+		-webkit-tap-highlight-color: transparent;
+		outline: none;
 	}
+
+	/* Aggressive background removal for hover/active/focus */
+	.menu-toggle:hover,
+	.menu-toggle:active,
+	.menu-toggle:focus {
+		background: transparent !important;
+		background-color: transparent !important;
+		box-shadow: none !important;
+		outline: none !important;
+	}
+
 	.menu-toggle .bar {
 		display: block;
 		width: 28px;
@@ -148,6 +149,7 @@
 		border-radius: 2px;
 		transition: all 0.3s ease-in-out;
 	}
+
 	.menu-toggle.is-active .bar:nth-child(1) {
 		transform: translateY(7px) rotate(45deg);
 	}
@@ -158,55 +160,33 @@
 		transform: translateY(-7px) rotate(-45deg);
 	}
 
-	/* --- MEDIA-CHROME PLAYER REFINEMENT --- */
+	.desktop-media-player-container {
+		flex-shrink: 0;
+		margin-top: 12px;
+		margin-left: var(--size-4);
+	}
+
+	.desktop-toggle-container {
+		flex-shrink: 0;
+		margin-left: var(--size-4);
+	}
+
+	/* Media Player Theming */
 	.header-media-player {
 		width: 250px;
 		height: 40px;
 		font-size: 0.9em;
-
-		/* FIX: Remove the 'backlight' glow from all buttons on hover */
 		--media-control-hover-background: transparent;
-
 		--media-background-color: transparent;
 		--media-control-background: transparent;
 		--media-range-thumb-color: var(--brand);
 		--media-range-track-color: var(--text-2);
 		--media-range-track-active-color: var(--brand);
-
-		/* FIX: Precision alignment for the volume track */
-		--media-range-track-height: 4px;
-		--media-range-thumb-height: 10px;
-		--media-range-thumb-width: 10px;
-
-		/* FIX: Removing focus backlight glow */
 		--media-focus-box-shadow: none;
-
-		--media-font-family: var(--font-system-ui);
-		--media-button-border-radius: var(--radius-round);
-
-		& .player-label {
-			font-weight: var(--font-weight-bold);
-			min-width: 50px; /* Ensures timer doesn't jump around */
-		}
 	}
 
-	media-volume-range {
-		outline: none;
-	}
-
-	/* Mobile logic same as before */
 	.mobile-only-items {
 		display: none;
-		width: 100%;
-		margin-top: var(--size-4);
-	}
-	.media-player-container-mobile {
-		width: 100%;
-		text-align: center;
-	}
-	.media-player-container-mobile .header-media-player {
-		width: 100%;
-		max-width: 300px;
 	}
 
 	@media (max-width: 767px) {
@@ -218,6 +198,7 @@
 		.desktop-toggle-container {
 			display: none;
 		}
+
 		nav .links {
 			position: absolute;
 			top: 100%;
@@ -231,12 +212,16 @@
 			padding: 0 var(--size-4);
 			flex-direction: column;
 		}
+
 		nav .links.is-open {
-			max-height: 500px;
+			max-height: 80vh; /* Better than 500px for long menus */
 			padding: var(--size-4);
 		}
+
 		.mobile-only-items {
 			display: block;
+			width: 100%;
+			margin-top: var(--size-4);
 		}
 	}
 </style>
