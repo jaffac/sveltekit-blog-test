@@ -4,12 +4,20 @@
 	import PageTransition from './transition.svelte'
 	import * as config from '$lib/config'
 
+	// 1. Add these imports
+	import { dev } from '$app/environment'
+	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit'
+
 	import 'open-props/style'
 	import 'open-props/normalize'
 	import 'open-props/buttons'
 	import '../app.css'
 
-	// This interface fixes the "Property meta does not exist" error
+	// 2. Initialize it (only in production)
+	if (!dev) {
+		injectSpeedInsights()
+	}
+
 	interface Props {
 		children?: import('svelte').Snippet
 		data: {
