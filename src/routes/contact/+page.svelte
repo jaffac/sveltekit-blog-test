@@ -44,7 +44,7 @@
 				</div>
 				<div class="info-group">
 					<h3>Updates</h3>
-					<a href="/rss" class="primary-link">RSS Subscription</a>
+					<a href="/rss" class="primary-link" data-sveltekit-reload> RSS Subscription </a>
 				</div>
 			</div>
 		</div>
