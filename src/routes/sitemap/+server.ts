@@ -2,15 +2,22 @@ import * as config from '$lib/config'
 import type { Post } from '$lib/types'
 
 export async function GET({ fetch }) {
-	const response = await fetch('api/posts')
-	const posts: Post[] = await response.json()
+	try {
+		// 1. Fixed the path with a leading slash for Vercel
+		const response = await fetch('/api/posts')
 
-	const headers = {
-		'Content-Type': 'application/xml',
-		'Cache-Control': 'max-age=0, s-maxage=3600'
-	}
+		if (!response.ok) {
+			throw new Error(`Failed to fetch posts: ${response.status}`)
+		}
 
-	const xml = `<?xml version="1.0" encoding="UTF-8"?>
+		const posts: Post[] = await response.json()
+
+		const headers = {
+			'Content-Type': 'application/xml',
+			'Cache-Control': 'max-age=0, s-maxage=3600'
+		}
+
+		const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>${config.url}</loc>
@@ -35,5 +42,16 @@ export async function GET({ fetch }) {
 			.join('')}
 </urlset>`.trim()
 
-	return new Response(xml, { headers })
+		return new Response(xml, { headers })
+	} catch (error) {
+		console.error('Sitemap generation error:', error)
+		// Return a basic sitemap if the fetch fails during build
+		return new Response(
+			`<?xml version="1.0" encoding="UTF-8"?>
+            <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+                <url><loc>${config.url}</loc></url>
+            </urlset>`,
+			{ headers: { 'Content-Type': 'application/xml' } }
+		)
+	}
 }
