@@ -4,7 +4,6 @@
 	import PageTransition from './transition.svelte'
 	import * as config from '$lib/config'
 
-	// 1. Add these imports
 	import { dev } from '$app/environment'
 	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit'
 
@@ -13,7 +12,6 @@
 	import 'open-props/buttons'
 	import '../app.css'
 
-	// 2. Initialize it (only in production)
 	if (!dev) {
 		injectSpeedInsights()
 	}
@@ -22,6 +20,7 @@
 		children?: import('svelte').Snippet
 		data: {
 			url: string
+			posts: any[]
 			meta?: {
 				title?: string
 				description?: string
@@ -35,7 +34,6 @@
 <svelte:head>
 	<title>{data.meta?.title ? `${data.meta.title} | ${config.title}` : config.title}</title>
 	<meta name="description" content={data.meta?.description || config.description} />
-
 	<meta property="og:site_name" content={config.title} />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content={data.url} />
@@ -44,7 +42,6 @@
 	<meta property="og:image" content="{config.url}/og-image.png" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
-
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:url" content={data.url} />
 	<meta name="twitter:title" content={data.meta?.title || config.title} />
@@ -55,11 +52,33 @@
 <div class="layout">
 	<Header />
 
-	<main>
-		<PageTransition url={data.url}>
-			{@render children?.()}
-		</PageTransition>
-	</main>
+	<div class="sidebar-grid">
+		<aside class="sidebar">
+			<nav>
+				<p class="nav-label">Latest</p>
+				<ul class="sidebar-list">
+					{#each data.posts.slice(0, 5) as post}
+						<li class:active={data.url.includes(post.slug)}>
+							<span class="side-date">
+								{post.date.split('-')[2]}.{parseInt(post.date.split('-')[1])}
+							</span>
+							<a href="/{post.slug}">{post.title}</a>
+						</li>
+					{/each}
+				</ul>
+
+				<div class="archive-nav">
+					<a href="/archive" class="archive-link">Full Archive →</a>
+				</div>
+			</nav>
+		</aside>
+
+		<main>
+			<PageTransition url={data.url}>
+				{@render children?.()}
+			</PageTransition>
+		</main>
+	</div>
 
 	<Footer />
 </div>
@@ -72,17 +91,141 @@
 		grid-template-rows: auto 1fr auto;
 		margin-inline: auto;
 		padding-inline: var(--size-7);
+		min-height: 100vh;
 
-		@media (min-width: 1440px) {
-			padding-inline: 0;
-		}
+		/* Base Dark Mode Vars */
+		--side-text: var(--gray-6);
+		--side-link: var(--gray-4);
+		--side-active: white;
+		--side-border: var(--gray-9);
+	}
 
-		main {
-			padding-block: var(--size-9);
+	/* Target Lite Mode - System Preference */
+	@media (prefers-color-scheme: light) {
+		.layout {
+			--side-text: var(--gray-7) !important;
+			--side-link: var(--gray-8) !important;
+			--side-active: var(--gray-12) !important;
+			--side-border: var(--gray-4) !important;
 		}
 	}
 
-	/* Global override to remove those gray circles/bubbles around tags */
+	/* Target Lite Mode - Manual Toggle */
+	:global([color-scheme='light']) .layout {
+		--side-text: var(--gray-7) !important;
+		--side-link: var(--gray-8) !important;
+		--side-active: var(--gray-12) !important;
+		--side-border: var(--gray-4) !important;
+	}
+
+	.sidebar-grid {
+		display: grid;
+		grid-template-columns: 240px 1fr;
+		gap: var(--size-10);
+		align-items: start;
+		margin-top: var(--size-8);
+	}
+
+	.sidebar {
+		position: sticky;
+		top: var(--size-9);
+		padding-block: var(--size-4);
+		padding-right: var(--size-8);
+		border-right: 1px solid var(--side-border);
+		height: fit-content;
+	}
+
+	.nav-label {
+		font-family: var(--font-mono);
+		font-size: var(--font-size-00);
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		color: var(--orange-5);
+		margin-bottom: var(--size-6);
+		display: flex;
+		align-items: center;
+		gap: var(--size-2);
+	}
+
+	.nav-label::before {
+		content: '';
+		width: 6px;
+		height: 6px;
+		background-color: var(--orange-5);
+		border-radius: 50%;
+		display: inline-block;
+	}
+
+	.sidebar-list {
+		list-style: none;
+		padding: 0;
+		display: grid;
+		gap: var(--size-7);
+		margin-bottom: var(--size-8);
+	}
+
+	.side-date {
+		font-family: var(--font-mono);
+		font-size: var(--font-size-00);
+		color: var(--side-text);
+		display: block;
+		margin-bottom: 2px;
+	}
+
+	.sidebar-list a {
+		text-decoration: none;
+		color: var(--side-link) !important;
+		font-size: var(--font-size-1);
+		line-height: var(--font-lineheight-1);
+		transition: color 0.2s ease;
+	}
+
+	.sidebar-list li.active a {
+		color: var(--side-active) !important;
+		font-weight: var(--font-weight-6);
+	}
+
+	.sidebar-list li.active .side-date {
+		color: var(--orange-5);
+	}
+
+	.sidebar-list a:hover {
+		color: var(--orange-5) !important;
+	}
+
+	.archive-nav {
+		border-top: 1px dashed var(--side-border);
+		padding-top: var(--size-6);
+	}
+
+	.archive-link {
+		font-family: var(--font-mono);
+		font-size: var(--font-size-00);
+		color: var(--side-text) !important;
+		text-decoration: none;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+
+	.archive-link:hover {
+		color: var(--orange-5) !important;
+		text-decoration: underline;
+	}
+
+	main {
+		padding-block: var(--size-4);
+	}
+
+	@media (max-width: 1024px) {
+		.sidebar-grid {
+			grid-template-columns: 1fr;
+		}
+		.sidebar {
+			display: none;
+		}
+	}
+
+	/* Globals for Tags */
 	:global(.tags a) {
 		background: none !important;
 		border: none !important;
