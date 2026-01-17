@@ -4,7 +4,6 @@ import type { Post } from '$lib/types'
 
 export const GET: RequestHandler = async ({ fetch }) => {
 	try {
-		// Use leading slash for internal SvelteKit fetch
 		const response = await fetch('/api/posts')
 
 		if (!response.ok) {
@@ -19,6 +18,7 @@ export const GET: RequestHandler = async ({ fetch }) => {
 		}
 
 		const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>${config.url}</loc>
@@ -46,9 +46,9 @@ export const GET: RequestHandler = async ({ fetch }) => {
 		return new Response(xml, { headers })
 	} catch (error) {
 		console.error('Sitemap generation error:', error)
-		// Fallback sitemap to prevent build crash
 		return new Response(
 			`<?xml version="1.0" encoding="UTF-8"?>
+            <?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
             <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
                 <url><loc>${config.url}</loc></url>
             </urlset>`,
