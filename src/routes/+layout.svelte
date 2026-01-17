@@ -51,6 +51,14 @@
 	<meta property="og:image" content="{config.url}/og-image.png" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
+	<meta
+		property="og:image:alt"
+		content="Blog.link - Self-hosting and privacy-focused development blog from Sarajevo"
+	/>
+	<meta
+		name="twitter:image:alt"
+		content="Blog.link - Self-hosting and privacy-focused development blog from Sarajevo"
+	/>
 
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:url" content="{config.url}{data.url}" />
