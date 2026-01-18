@@ -1,6 +1,11 @@
-type DateStyle = Intl.DateTimeFormatOptions['dateStyle']
+export function formatDate(date: string, locales = 'en-GB') {
+	// Create a date object, ensuring we handle the string correctly
+	const d = new Date(date)
 
-export function formatDate(date: string, dateStyle: DateStyle = 'medium', locales = 'en') {
-	const formatter = new Intl.DateTimeFormat(locales, { dateStyle })
-	return formatter.format(new Date(date))
+	const day = d.getDate()
+	const month = d.toLocaleString(locales, { month: 'long' })
+	const year = d.getFullYear()
+
+	// The dot after the day is essential for the Sarajevo format
+	return `${day}. ${month} ${year}`
 }
