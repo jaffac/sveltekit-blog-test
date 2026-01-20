@@ -92,7 +92,7 @@
 
 	/* THE VERTICAL CARD */
 	.vertical-card {
-		background: var(--surface-2);
+		background: var(--surface-3);
 		border: 1px solid var(--border);
 		border-radius: var(--radius-3);
 		padding: var(--size-9);
