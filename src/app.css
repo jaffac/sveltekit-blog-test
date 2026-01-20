@@ -326,12 +326,22 @@ li {
 	/* Links: Orange & Bold */
 	a {
 		color: var(--orange-5);
-		text-decoration: none !important;
-		font-weight: 600;
-		transition: color 0.2s ease;
+		text-decoration: none !important; /* Forces the underline to stay hidden */
+		font-weight: 700; /* Increased to 700 for a more 'designer' look */
+		letter-spacing: -0.01em;
+		transition: all 0.2s ease;
+
+		/* Optional: a very thin bottom border that only appears on hover */
+		border-bottom: 1px solid transparent;
 
 		&:hover {
 			color: var(--orange-3);
+			border-bottom: 1px solid var(--orange-3);
+		}
+
+		&:focus {
+			outline: none;
+			color: var(--orange-2);
 		}
 	}
 

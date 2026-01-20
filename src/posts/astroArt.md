@@ -16,7 +16,7 @@ published: true
 
 ## Introduction
 
-As a developer, I spend my days looking at terminal outputs and build logs. But my wife, Mirela, spends her days looking at textures, colors, and the delicate details of her jewelry and illustrations.
+As a developer, I spend my days looking at terminal outputs and build logs. But my wife, Mirela, spends her days looking at textures, colors, and the delicate details of her jewelry and illustrations at [bymirela.art](https://bymirela.art)
 
 Her art is a reflection of her life. She creates the art; Cloudflare and Astro provide the light.
 

@@ -67,32 +67,29 @@
 	}
 
 	.prose {
-		/* This creates the big, airy vertical rhythm */
-		:global(p) {
-			margin-top: var(--size-9); /* Big space between paragraphs */
-			line-height: var(--font-lineheight-4);
-			font-size: var(--font-size-3);
+		/* Target all links and every possible state */
+		:global(a),
+		:global(a:hover),
+		:global(a:focus),
+		:global(a:active) {
+			text-decoration: none !important;
+			/* This removes the 'ghost' underline some browsers add */
+			text-decoration-line: none !important;
+			/* This removes the box some browsers put around links */
+			outline: none !important;
+			border-bottom: none !important;
 		}
 
-		/* Keep text tight to the header it belongs to */
-		:global(h2 + p),
-		:global(h3 + p) {
-			margin-top: var(--size-3);
+		:global(a) {
+			color: var(--orange-6) !important;
+			font-weight: 700;
+			transition: color 0.2s ease;
 		}
 
-		:global(h2) {
-			margin-top: var(--size-12); /* Massive space before new sections */
-			color: var(--text-1);
-		}
-
-		:global(ul) {
-			margin-top: var(--size-6);
-			padding-inline-start: var(--size-8);
-			list-style-type: '🔥';
-		}
-
-		:global(li) {
-			margin-block: var(--size-4);
+		:global(a:hover) {
+			color: var(--orange-3) !important;
+			/* Instead of a line, we use a glow to show it's active */
+			text-shadow: 0 0 10px rgba(255, 145, 0, 0.3);
 		}
 	}
 </style>
