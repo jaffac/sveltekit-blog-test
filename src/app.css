@@ -281,21 +281,21 @@ li {
 .prose {
 	max-width: 70ch;
 	margin-inline: auto;
-	padding-inline: var(--size-5); /* Prevents text hitting edge on mobile */
+	padding-inline: var(--size-5); /* Stops text from hitting mobile screen edges */
 
 	p {
-		/* 1. MOBILE DEFAULTS (Tight & Connected) */
-		margin-top: var(--size-5);
-		line-height: var(--font-lineheight-3);
+		/* BASE STYLE: Your original tight look */
+		margin-top: var(--size-7);
+		line-height: var(--font-lineheight-3); /* Tight leading for mobile */
 		font-size: var(--font-size-2);
 		color: var(--text-2);
 
-		/* 2. DESKTOP UPGRADES (The Gallery Feel) */
+		/* DESKTOP UPGRADE: Only expand on large screens */
 		@media (min-width: 768px) {
 			font-size: var(--font-size-3);
-			line-height: var(--font-lineheight-5);
+			line-height: var(--font-lineheight-5); /* Airy for desktop */
 
-			/* Only apply the massive gap on desktop */
+			/* High-specificity 'Breath' logic ONLY for desktop */
 			&:not(:is(h2, h3, h4, h5, h6) + p) {
 				margin-top: var(--size-10);
 			}
@@ -306,37 +306,52 @@ li {
 		}
 	}
 
-	/* Keep headings tight to their paragraphs on ALL screens */
+	/* Keep headers close to their text */
 	:is(h2, h3, h4, h5, h6) + p {
 		margin-top: var(--size-2) !important;
 	}
 
-	/* Section breaks - adjust for mobile */
+	/* Section Headings */
 	:is(h2, h3, h4, h5, h6) {
 		margin-top: var(--size-8);
-		margin-bottom: var(--size-4);
+		margin-bottom: var(--size-3);
 		color: var(--text-1);
+		line-height: 1.1;
 
 		@media (min-width: 768px) {
 			margin-top: var(--size-12);
-			margin-bottom: var(--size-5);
 		}
 	}
 
-	/* Blockquotes / Island Spacing Fix */
+	/* Links: Orange & Bold */
+	a {
+		color: var(--orange-5);
+		text-decoration: none !important;
+		font-weight: 600;
+		transition: color 0.2s ease;
+
+		&:hover {
+			color: var(--orange-3);
+		}
+	}
+
+	/* Island/Blockquote: Restores the 'Stage' without the clutter */
 	blockquote {
 		margin-block: var(--size-10);
 		padding: var(--size-6);
+		background: var(--surface-3);
+		border-left: 5px solid var(--brand);
+		border-radius: var(--radius-3);
 
-		@media (min-width: 768px) {
-			margin-block: var(--size-12);
-			padding: var(--size-10);
-		}
-
-		/* Ensure Ritual text doesn't get global p gaps */
 		p {
 			margin-top: 0 !important;
+			color: var(--text-1);
+			font-size: var(--font-size-2);
 			line-height: var(--font-lineheight-3) !important;
+
+			@media (min-width: 768px) {
+				font-size: var(--font-size-4);
+			}
 		}
 	}
 }

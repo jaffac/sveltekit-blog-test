@@ -46,5 +46,6 @@
 		border-inline-start: 4px solid var(--brand);
 		padding-inline-start: var(--size-6);
 		color: var(--text-2);
+		background: var(--surface-3);
 	}
 </style>
