@@ -111,6 +111,11 @@
 	nav a {
 		color: inherit;
 		text-decoration: none;
+		transition: color 0.2s ease; /* Keeps the change smooth */
+	}
+
+	nav a:hover {
+		color: var(--orange-4); /* Turns orange on hover */
 	}
 
 	/* Hamburger Menu Styles & The "Pill" Fix */
