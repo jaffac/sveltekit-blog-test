@@ -1,7 +1,7 @@
 ---
 title: 'Why Astro & Cloudflare are the Future of Digital Art'
 description: 'A deep dive into migrating bymirela.art to Astro 5 and Cloudflare.'
-date: '2026-01-20'
+date: '2026-01-21'
 categories:
   - astro
   - cloudflare

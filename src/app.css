@@ -279,26 +279,9 @@ li {
 }
 
 .prose {
-	max-width: 70ch;
-	margin-inline: auto;
-	padding-inline: var(--size-5); /* Stops text from hitting mobile screen edges */
-
 	p {
-		/* BASE STYLE: Your original tight look */
-		margin-top: var(--size-7);
-		line-height: var(--font-lineheight-3); /* Tight leading for mobile */
-		font-size: var(--font-size-2);
-		color: var(--text-2);
-
-		/* DESKTOP UPGRADE: Only expand on large screens */
-		@media (min-width: 768px) {
-			font-size: var(--font-size-3);
-			line-height: var(--font-lineheight-5); /* Airy for desktop */
-
-			/* High-specificity 'Breath' logic ONLY for desktop */
-			&:not(:is(h2, h3, h4, h5, h6) + p) {
-				margin-top: var(--size-10);
-			}
+		:not(:is(h2, h3, h4, h5, h6) + p) {
+			margin-top: var(--size-7);
 		}
 
 		&:has(img) {
@@ -306,62 +289,50 @@ li {
 		}
 	}
 
-	/* Keep headers close to their text */
-	:is(h2, h3, h4, h5, h6) + p {
-		margin-top: var(--size-2) !important;
-	}
-
-	/* Section Headings */
 	:is(h2, h3, h4, h5, h6) {
 		margin-top: var(--size-8);
 		margin-bottom: var(--size-3);
-		color: var(--text-1);
-		line-height: 1.1;
-
-		@media (min-width: 768px) {
-			margin-top: var(--size-12);
-		}
 	}
 
-	/* Links: Orange & Bold */
-	a {
-		color: var(--orange-5);
-		text-decoration: none !important; /* Forces the underline to stay hidden */
-		font-weight: 700; /* Increased to 700 for a more 'designer' look */
-		letter-spacing: -0.01em;
-		transition: all 0.2s ease;
-
-		/* Optional: a very thin bottom border that only appears on hover */
-		border-bottom: 1px solid transparent;
-
-		&:hover {
-			color: var(--orange-3);
-			border-bottom: 1px solid var(--orange-3);
-		}
-
-		&:focus {
-			outline: none;
-			color: var(--orange-2);
-		}
+	:is(ul, ol) {
+		list-style-type: '🔥';
+		padding-left: var(--size-5);
 	}
 
-	/* Island/Blockquote: Restores the 'Stage' without the clutter */
+	:is(ul, ol) li {
+		margin-block: var(--size-2);
+		padding-inline-start: var(--size-2);
+	}
+
+	pre {
+		max-inline-size: 100%;
+		padding: var(--size-3);
+		border-radius: 8px;
+		tab-size: 2;
+	}
 	blockquote {
 		margin-block: var(--size-10);
-		padding: var(--size-6);
-		background: var(--surface-3);
-		border-left: 5px solid var(--brand);
-		border-radius: var(--radius-3);
+		margin-inline: 0;
+		padding: var(--size-7);
+		background: var(--surface-3); /* Dark stage background */
+		border-left: 4px solid var(--orange-5);
+		border-radius: var(--radius-2);
 
+		/* Targets the text inside the blockquote */
 		p {
-			margin-top: 0 !important;
-			color: var(--text-1);
-			font-size: var(--font-size-2);
-			line-height: var(--font-lineheight-3) !important;
+			margin-top: 0 !important; /* Overrides your general p margin */
+			color: var(--text-1); /* Makes the ritual instructions brighter */
+			font-style: italic;
+			font-size: var(--font-size-3);
+			line-height: var(--font-lineheight-4);
+		}
 
-			@media (min-width: 768px) {
-				font-size: var(--font-size-4);
-			}
+		/* If you have a bold intro like "The Ritual" */
+		strong,
+		h3 {
+			color: var(--brand);
+			display: block;
+			margin-bottom: var(--size-2);
 		}
 	}
 }

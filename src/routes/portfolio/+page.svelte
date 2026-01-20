@@ -1,6 +1,14 @@
 <script>
 	const projects = [
 		{
+			title: 'Mirela Art Gallery',
+			description:
+				'A curated digital showcase of jewelry, textures, and illustrations. This project focuses on high-fidelity image delivery and a minimalist aesthetic to highlight the delicate details of traditional craftsmanship in a digital space.',
+			tags: ['Design', 'Gallery', 'Art'],
+			status: 'Live',
+			link: 'https://bymirela.art'
+		},
+		{
 			title: 'Booklore Self-Hosted',
 			description:
 				'A private, lightweight book tracking application. I manage my entire library here, away from big tech platforms. Built to handle massive metadata locally with a focus on speed and privacy.',

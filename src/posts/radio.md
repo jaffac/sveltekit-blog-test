@@ -15,7 +15,7 @@ In the same way that we reclaim our personal data from centralized trackers, we 
 
 > ### 📻 The Ritual
 >
-> Before reading further, locate the **radio player** at the top of this page. Click the **Play** button to sync your environment with the sounds of Copenhagen. Let the frequency set the architecture of your room.
+> Before reading further, locate the radio player at the top of this page. Click the Play button to sync your environment with the sounds of Copenhagen. Let the frequency set the architecture of your room.
 
 ## The Philosophy of Ambient Space
 
