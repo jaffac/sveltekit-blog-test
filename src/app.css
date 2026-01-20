@@ -279,35 +279,81 @@ li {
 }
 
 .prose {
+	/* Slightly wider to allow the white space to feel natural */
+	max-width: 70ch;
+	margin-inline: auto;
+
 	p {
+		/* This is the "Breath": Increased to size-10 */
 		:not(:is(h2, h3, h4, h5, h6) + p) {
-			margin-top: var(--size-7);
+			margin-top: var(--size-10);
 		}
+
+		/* Essential for a "Gallery" feel: Extra air between lines */
+		line-height: var(--font-lineheight-5);
+		font-size: var(--font-size-3);
+		color: var(--text-2);
 
 		&:has(img) {
 			display: contents;
 		}
 	}
 
+	/* Section breaks should feel like a fresh start */
 	:is(h2, h3, h4, h5, h6) {
-		margin-top: var(--size-8);
-		margin-bottom: var(--size-3);
+		margin-top: var(--size-10); /* Large gap to separate major thoughts */
+		margin-bottom: var(--size-5);
+		color: var(--text-1);
+		letter-spacing: var(--font-letterspacing-1);
 	}
 
+	/* The "Sub-headline" rule: Keep the first sentence close to the header */
+	:is(h2, h3, h4) + p {
+		margin-top: var(--size-2);
+	}
+
+	/* Lists: More space between items so they don't bunch up */
 	:is(ul, ol) {
 		list-style-type: '🔥';
-		padding-left: var(--size-5);
+		padding-left: var(--size-8);
+		margin-block: var(--size-10);
 	}
 
 	:is(ul, ol) li {
-		margin-block: var(--size-2);
-		padding-inline-start: var(--size-2);
+		margin-block: var(--size-5);
+		padding-inline-start: var(--size-3);
 	}
 
-	pre {
-		max-inline-size: 100%;
-		padding: var(--size-3);
-		border-radius: 8px;
-		tab-size: 2;
+	/* Blockquotes (The Island Logic): Give it its own "Stage" */
+	blockquote {
+		margin-block: var(--size-12);
+		padding: var(--size-10);
+		background: var(--surface-2);
+		border-left: 5px solid var(--brand);
+		border-radius: var(--radius-3);
+
+		p {
+			margin-top: 0 !important;
+			color: var(--text-1);
+			font-size: var(--font-size-4); /* Slightly larger for emphasis */
+		}
+	}
+	/* The Link Strategy */
+	a {
+		color: var(--orange-5);
+		text-decoration: none; /* Removes the underline */
+		transition: color 0.2s ease;
+
+		&:hover {
+			color: var(--orange-3);
+			/* This provides a "ghost" underline only when active */
+			border-bottom: none;
+		}
+	}
+
+	/* Target links inside your custom component specifically */
+	:global(.island-content a) {
+		font-weight: var(--font-weight-7);
+		color: var(--orange-4); /* Slightly brighter inside the dark island box */
 	}
 }
