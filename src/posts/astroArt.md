@@ -31,9 +31,6 @@ Most artist portfolios are trapped in heavy frameworks or slow CMS platforms. Wh
 Most frameworks ship a "giant blob" of JavaScript. Astro only ships the code for the specific parts of the page that actually _do_ something. This is the secret to a "Zero-Jank" gallery.
 Traditional frameworks treat your site like a heavy suitcase; Astro treats it like a lightweight gallery.
 
-- **Old Way:** 1.2MB of JS just to show a static image.
-- **Astro Way:** Pure HTML for the art + 5kb for the "Island."
-
 This architecture ensures that the **Art is the Hero**, and the code is just the invisible lighting in the room.
 
 </ElectricIsland>

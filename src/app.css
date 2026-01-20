@@ -279,81 +279,64 @@ li {
 }
 
 .prose {
-	/* Slightly wider to allow the white space to feel natural */
 	max-width: 70ch;
 	margin-inline: auto;
+	padding-inline: var(--size-5); /* Prevents text hitting edge on mobile */
 
 	p {
-		/* This is the "Breath": Increased to size-10 */
-		:not(:is(h2, h3, h4, h5, h6) + p) {
-			margin-top: var(--size-10);
-		}
-
-		/* Essential for a "Gallery" feel: Extra air between lines */
-		line-height: var(--font-lineheight-5);
-		font-size: var(--font-size-3);
+		/* 1. MOBILE DEFAULTS (Tight & Connected) */
+		margin-top: var(--size-5);
+		line-height: var(--font-lineheight-3);
+		font-size: var(--font-size-2);
 		color: var(--text-2);
+
+		/* 2. DESKTOP UPGRADES (The Gallery Feel) */
+		@media (min-width: 768px) {
+			font-size: var(--font-size-3);
+			line-height: var(--font-lineheight-5);
+
+			/* Only apply the massive gap on desktop */
+			&:not(:is(h2, h3, h4, h5, h6) + p) {
+				margin-top: var(--size-10);
+			}
+		}
 
 		&:has(img) {
 			display: contents;
 		}
 	}
 
-	/* Section breaks should feel like a fresh start */
+	/* Keep headings tight to their paragraphs on ALL screens */
+	:is(h2, h3, h4, h5, h6) + p {
+		margin-top: var(--size-2) !important;
+	}
+
+	/* Section breaks - adjust for mobile */
 	:is(h2, h3, h4, h5, h6) {
-		margin-top: var(--size-10); /* Large gap to separate major thoughts */
-		margin-bottom: var(--size-5);
+		margin-top: var(--size-8);
+		margin-bottom: var(--size-4);
 		color: var(--text-1);
-		letter-spacing: var(--font-letterspacing-1);
+
+		@media (min-width: 768px) {
+			margin-top: var(--size-12);
+			margin-bottom: var(--size-5);
+		}
 	}
 
-	/* The "Sub-headline" rule: Keep the first sentence close to the header */
-	:is(h2, h3, h4) + p {
-		margin-top: var(--size-2);
-	}
-
-	/* Lists: More space between items so they don't bunch up */
-	:is(ul, ol) {
-		list-style-type: '🔥';
-		padding-left: var(--size-8);
-		margin-block: var(--size-10);
-	}
-
-	:is(ul, ol) li {
-		margin-block: var(--size-5);
-		padding-inline-start: var(--size-3);
-	}
-
-	/* Blockquotes (The Island Logic): Give it its own "Stage" */
+	/* Blockquotes / Island Spacing Fix */
 	blockquote {
-		margin-block: var(--size-12);
-		padding: var(--size-10);
-		background: var(--surface-2);
-		border-left: 5px solid var(--brand);
-		border-radius: var(--radius-3);
+		margin-block: var(--size-10);
+		padding: var(--size-6);
 
+		@media (min-width: 768px) {
+			margin-block: var(--size-12);
+			padding: var(--size-10);
+		}
+
+		/* Ensure Ritual text doesn't get global p gaps */
 		p {
 			margin-top: 0 !important;
-			color: var(--text-1);
-			font-size: var(--font-size-4); /* Slightly larger for emphasis */
+			line-height: var(--font-lineheight-3) !important;
 		}
-	}
-	/* The Link Strategy */
-	a {
-		color: var(--orange-5);
-		text-decoration: none; /* Removes the underline */
-		transition: color 0.2s ease;
-
-		&:hover {
-			color: var(--orange-3);
-			/* This provides a "ghost" underline only when active */
-			border-bottom: none;
-		}
-	}
-
-	/* Target links inside your custom component specifically */
-	:global(.island-content a) {
-		font-weight: var(--font-weight-7);
-		color: var(--orange-4); /* Slightly brighter inside the dark island box */
 	}
 }
