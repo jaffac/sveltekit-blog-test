@@ -6,7 +6,7 @@
 				'A curated digital showcase of jewelry, textures, and illustrations. This project focuses on high-fidelity image delivery and a minimalist aesthetic to highlight the delicate details of traditional craftsmanship in a digital space.',
 			tags: ['Design', 'Gallery', 'Art'],
 			status: 'Live',
-			link: 'https://bymirela.art'
+			link: 'https://bymirela.dpdns.org/'
 		},
 		{
 			title: 'Booklore Self-Hosted',
