@@ -52,9 +52,17 @@ While Baxter plays the majority of the instruments himself, the addition of long
 If _Green_ was the beginning of the journey, _Oranj_ is the moment you stop walking, sit on the porch, and watch the sky turn that impossible, saturated hue of 2-inch tape.
 
 Whether you’re listening for the Robert Glasper-esque modern jazz fusion or the psychedelic ambient textures, this album feels like a culmination. It is a bridge between two cities and fifty years of recording history.
+
 <br/>
-**Experience the warmth:** If you want to support the artist and hear the saturation for yourself, check out the album on Bandcamp:
+
+**Experience the warmth:**
+
+If you want to support the artist and hear the saturation for yourself, check out the album on Bandcamp:
 
 [**Listen to Robohands - Oranj**](https://robohands.bandcamp.com/album/oranj)
+
 <br/>
-**Does your creative process lean toward the "digital grid" or the "analog hiss"?** Let's talk about the textures that define your work.
+
+**Does your creative process lean toward the "digital grid" or the "analog hiss"?**
+
+Let's talk about the textures that define your work.
