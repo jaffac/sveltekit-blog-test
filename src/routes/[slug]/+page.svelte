@@ -1,10 +1,26 @@
 <script lang="ts">
 	import { formatDate } from '$lib/utils'
+	import { untrack } from 'svelte' // If you want to avoid re-running on content change
 
 	let { data } = $props()
 
-	// Safety check: Fallback to an empty object if meta is missing
 	let meta = $derived(data?.meta || { title: 'Loading...', date: '', categories: [] })
+
+	// AUTOMATED LINK LOGIC:
+	// This effect runs after the component is mounted to the DOM
+	$effect(() => {
+		// We look for links specifically inside the 'prose' div
+		const links = document.querySelectorAll('.prose a')
+
+		links.forEach((link) => {
+			const href = link.getAttribute('href')
+			// Check if it's an external link (starts with http)
+			if (href && href.startsWith('http')) {
+				link.setAttribute('target', '_blank')
+				link.setAttribute('rel', 'noopener noreferrer')
+			}
+		})
+	})
 </script>
 
 <svelte:head>
@@ -36,8 +52,7 @@
 
 <style>
 	article {
-		/* Increased width slightly for a more "gallery" feel */
-		max-inline-size: 72ch;
+		max-inline-size: 72ch; /* Good choice, keeps line lengths readable */
 		margin-inline: auto;
 		padding-bottom: var(--size-12);
 
@@ -45,6 +60,7 @@
 			text-transform: capitalize;
 			color: var(--brand);
 			font-size: var(--font-size-7);
+			line-height: var(--font-lineheight-1); /* Tighter heading line height */
 		}
 
 		h1 + p {
@@ -56,7 +72,7 @@
 			display: flex;
 			gap: var(--size-3);
 			margin-top: var(--size-4);
-			margin-bottom: var(--size-10); /* Air before content starts */
+			margin-bottom: var(--size-10);
 
 			.tag {
 				color: var(--orange-5);
@@ -67,15 +83,39 @@
 	}
 
 	.prose {
-		/* Target all links and every possible state */
+		/* FIX FOR CRAMPED TEXT: Vertical Rhythm */
+		display: flex;
+		flex-direction: column;
+		gap: var(--size-6); /* Consistent spacing between all blocks */
+
+		:global(p) {
+			line-height: 1.75; /* Increased for better readability */
+			font-size: var(--font-size-2);
+			color: var(--text-1);
+		}
+
+		:global(h2) {
+			margin-top: var(--size-8); /* Significant gap before a new section */
+			margin-bottom: var(--size-2);
+			color: var(--text-1);
+			font-size: var(--font-size-5);
+		}
+
+		/* Blockquote / Pull Quote style for that "Island" look */
+		:global(blockquote) {
+			margin-inline: 0;
+			padding: var(--size-4) var(--size-6);
+			border-left: 4px solid var(--orange-5);
+			background: var(--surface-2);
+			font-style: italic;
+		}
+
+		/* Cleaning up the Links */
 		:global(a),
 		:global(a:hover),
 		:global(a:focus),
 		:global(a:active) {
 			text-decoration: none !important;
-			/* This removes the 'ghost' underline some browsers add */
-			text-decoration-line: none !important;
-			/* This removes the box some browsers put around links */
 			outline: none !important;
 			border-bottom: none !important;
 		}
@@ -88,7 +128,6 @@
 
 		:global(a:hover) {
 			color: var(--orange-3) !important;
-			/* Instead of a line, we use a glow to show it's active */
 			text-shadow: 0 0 10px rgba(255, 145, 0, 0.3);
 		}
 	}
