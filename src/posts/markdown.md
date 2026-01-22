@@ -16,7 +16,7 @@ published: true
 
 ## Introduction
 
-There is a restless noise that comes with modern digital tools. Every time you open a standard word processor, you aren't just met with a blank page; you're met with a cockpit of buttons, menus, and hidden formatting that wants to categorize your thoughts before you've even finished them.
+Every time you open a standard word processor, you aren't just met with a blank page; you're met with a cockpit of buttons, menus, and hidden formatting that wants to categorize your thoughts before you've even finished them.
 
 You want to write a poem, but the software wants to talk about font families. You want to capture a spark, but the interface wants to update its ribbon.
 
