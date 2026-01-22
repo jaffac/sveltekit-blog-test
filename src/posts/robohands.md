@@ -21,7 +21,7 @@ There is a specific kind of magic that happens when a musician stops trying to b
 If you’ve spent any time on this blog, you know my affinity for **orange**—not just as a color, but as a feeling. It’s the hue of a sun-drenched afternoon, the glow of a vacuum tube, and the saturated hum of a vintage record. It seems **Andy Baxter**, the architect behind the London-based project **Robohands**, has finally caught up to that same frequency.
 <br/>
 
-With his latest LP, **_Oranj_** (released 16 January 2026), Baxter has completed his chromatic journey, moving from the mossy underground of **_Green_** (2018) into the rich, amber light of his most defiant record yet.
+With his latest LP, **_Oranj_** (released 16. January 2026), Baxter has completed his chromatic journey, moving from the mossy underground of **_Green_** (2018) into the rich, amber light of his most defiant record yet.
 
 <ElectricIsland>
 
