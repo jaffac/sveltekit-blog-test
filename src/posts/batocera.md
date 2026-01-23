@@ -3,9 +3,9 @@ title: 'Batocera: The Plug-and-Play OS for My Inner Child'
 description: 'Rescuing old hardware to build a dedicated, zero-bloat retro gaming time machine.'
 date: '2026-01-23'
 categories:
-  - self-hosting
+  - retro
   - gaming
-  - hardware-rescue
+  - rescue
 published: true
 ---
 
@@ -38,8 +38,6 @@ For those of us who like things organized, headless, and accessible, Batocera hi
 - **Scraper Integration:** It connects to databases like ScreenScraper to automatically pull in box art, manuals, and video previews, turning a folder of files into a professional digital library.
 
 ## The Hardware: Giving "E-Waste" a Soul
-
-The beauty of Batocera is its versatility.
 
 For my build, I rescued an old **Dell OptiPlex 3050 Mini Tower PC**.
 
