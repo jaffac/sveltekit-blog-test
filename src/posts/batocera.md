@@ -13,9 +13,9 @@ published: true
 
 Let's stop talking about Docker containers, network security, or optimizing my TrueNAS stack. Let's talk about hardware rescue.
 
-My old machine sitting on the shelf gathering dust. I could have turned it into another node for my cluster, but instead, I decided to do something more nostalgic.
+An old machine was sitting on the shelf gathering dust. Instead of turning it into another node for the cluster, the choice was made to do something more nostalgic.
 
-Wanted a "Time Machine" that didn't require a keyboard, a mouse, or a terminal to operate once it was turned on.
+The goal was a "Time Machine" that didn't require a keyboard, a mouse, or a terminal to operate once powered on.
 
 Enter **[Batocera](https://batocera.org)**, a Linux distribution that turns old hardware into a dedicated, zero-bloat retro gaming time machine.
 
@@ -33,15 +33,17 @@ When you boot it, you aren't looking at a desktop; you're looking at a polished,
 
 For those of us who like things organized, headless, and accessible, Batocera hits the sweet spot:
 
-- **The SHARE Partition:** Once it's on your network, the SHARE folder is accessible via SMB. Dropping ROMs and BIOS files into your library is as simple as moving files on a NAS.
-- **F1 for Power Users:** Even though it looks like a console, hitting **F1** on your keyboard drops you into a file manager that feels like a standard Linux desktop. It's the "backdoor" for when you need to manually tweak configs.
+- **The SHARE Partition:** Once it's on the network, the SHARE folder is accessible via SMB. Dropping ROMs and BIOS files into the library is as simple as moving files on a NAS.
+- **F1 for Power Users:** Even though it looks like a console, hitting **F1** on the keyboard drops you into a file manager that feels like a standard Linux desktop. It's the "backdoor" for when you need to manually tweak configs.
 - **Scraper Integration:** It connects to databases like ScreenScraper to automatically pull in box art, manuals, and video previews, turning a folder of files into a professional digital library.
 
 ## The Hardware: Giving "E-Waste" a Soul
 
-For my build, I rescued an old **Dell OptiPlex 3050 Mini Tower PC**.
+For this build, the candidate was an old **Dell OptiPlex 3050 Mini Tower PC**.
 
-I gave it a second life by dropping in an **Intel i7-6700**, **16GB of RAM**, and a low-profile **GTX 1050 Ti (4GB)**. This setup is the "sweet spot" for emulation—it stays quiet, fits in a media cabinet, and has enough grunt to upscale PS2 and GameCube games to 1080p or 4K without breaking a sweat.
+It received a second life by dropping in an **Intel i7-6700**, **16GB of RAM**, and a **GTX 1050 Ti (4GB)**. To complete the "budget premium" feel, a **GameSir Nova Lite** from Temu was added. It's a Hall Effect controller that feels far more expensive than its price tag suggests. This setup is the "sweet spot" for emulation—it stays quiet, fits in a media cabinet, and has enough grunt to upscale PS2 and GameCube games to 1080p or 4K without breaking a sweat.
+
+More importantly, this configuration has enough overhead to handle **Nintendo Switch** titles, turning a recycled office machine into a modern hybrid console.
 
 - **The SFF Office PC:** Even a stock OptiPlex or Lenovo Tiny is a beast for Batocera if you stay within the 8-bit to 64-bit era.
 - **The Broken Laptop:** Have a laptop with a smashed screen? Remove the panel, plug it into your TV via HDMI, and you have a dedicated "Console."
@@ -57,6 +59,8 @@ But the real "stealth" feature is the integration of **[Kodi](https://kodi.tv)**
 
 With one button press, the arcade interface disappears and you’re inside a full-blown media center. It handles 4K playback, local libraries, and streaming plugins with ease. It effectively transforms the machine from a "toy" into the primary entertainment hub for your living room.
 
-Is it a "productive" use of hardware? In the traditional sense, no. But there is something incredibly satisfying about taking a piece of equipment headed for the recycling bin and turning it into a portal to your childhood that also happens to play your entire media collection.
+Is it a "productive" use of hardware? In the traditional sense, no.
+
+But there is something incredibly satisfying about taking a piece of equipment headed for the recycling bin and turning it into a portal to your childhood that also happens to play your entire media collection.
 
 _Do you have an old PC gathering dust, or are you keeping your homelab strictly for "work"?_
